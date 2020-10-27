@@ -1,9 +1,12 @@
 
 import 'package:FoodShopApp/components/constants.dart';
+import 'package:FoodShopApp/models/foodlist.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class HomeScreen extends StatefulWidget
 {
@@ -13,12 +16,13 @@ class HomeScreen extends StatefulWidget
 
 class _HomeSceen extends State<HomeScreen>
 {
-  //Property
+  // #region property
+
   SearchBar searchBar;
 
+  // #endregion
 
-
-  //Appbar custom
+  // #region Appbar custom
   AppBar appbar(BuildContext context) 
   {
     return new AppBar
@@ -52,6 +56,7 @@ class _HomeSceen extends State<HomeScreen>
     );
   } 
 
+
   _HomeSceen() 
   {
     searchBar = new SearchBar
@@ -63,8 +68,20 @@ class _HomeSceen extends State<HomeScreen>
     );
   }
   
+  // #endregion
 
+  // #region FetchData FoodList
+  final String apiUrl ="https://jsonplaceholder.typicode.com/posts";
 
+  Future<List<dynamic>> getFoodList() async 
+  {
+
+    var result = await http.get(apiUrl);
+    return json.decode(result.body);
+
+  }
+
+  // #endregion
   @override
   Widget build (BuildContext context) 
   {
@@ -133,71 +150,79 @@ class _HomeSceen extends State<HomeScreen>
                 Container
                 (
                   height: size.height * 0.25,
-                  child: ListView
+                  child: Stack
                   (
-                    padding: EdgeInsets.only
-                    (
-                      left: 10,
-                      right: 10,
-                    ),
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
                     children: <Widget>
                     [
-                      for (int i = 0 ; i < 50 ; i ++)
+                      FutureBuilder<List<dynamic>>
                       (
-                        Card
-                        (
-                          shape: BeveledRectangleBorder
-                          (
-                            borderRadius: BorderRadius.circular(15.0),
-                          ),
-                          color: kMainColor,
-                          child: Container
-                          (
-                            
-                            width: 150,
-                            decoration: BoxDecoration
+                        future: getFoodList(),
+                        builder: (context , foodSnap)
+                        {
+                          if(foodSnap.connectionState == ConnectionState.done || foodSnap.hasData)
+                          {
+                            return ListView
                             (
-                              borderRadius: BorderRadius.all(Radius.circular(100))
-                            ),
-                            child: Center
-                            (
-                              child: Column
+                              padding: EdgeInsets.only
                               (
-                                children: <Widget>
-                                [
-                                  SvgPicture.asset
+                                left: 10,
+                                right: 10,
+                              ),
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              children: <Widget>
+                              [
+                                for(int i =0 ; i< foodSnap.data.length ; i++)
+                                  Card
                                   (
-                                    ("assets/images/logo-full.svg"),
-                                    height: 50,
-                                  ),
-                                  Spacer(),
-                                  Center
-                                  (
-                                    child: Align
+                                    shape: BeveledRectangleBorder
                                     (
-                                      alignment: Alignment.bottomCenter,
-                                      child: Text
+                                      borderRadius: BorderRadius.circular(15.0),
+                                    ),
+                                    color: kMainColor,
+                                    child: Container
+                                    (
+                                      
+                                      width: 150,
+                                      decoration: BoxDecoration
                                       (
-                                        i.toString(),
-                                        style: TextStyle
+                                        borderRadius: BorderRadius.all(Radius.circular(100))
+                                      ),
+                                      child: Center
+                                      (
+                                        child: Stack
                                         (
-                                          color: Colors.white,
-                                        ),
-                                      )
-                                    )
+                                          children: <Widget>
+                                          [
+                                            Center
+                                            (
+                                              child: Align
+                                              (
+                                                alignment: Alignment.center,
+                                                child: Text
+                                                (
+                                                  foodSnap.data[i]["title"].toString(),
+                                                  style: TextStyle
+                                                  (
+                                                    color: Colors.white,
+                                                  ),
+                                                )
+                                              )
+                                            )
+                                          ],
+                                        )
+                                      ),
+                                    ),
                                   )
-                                ],
-                              )
-                            ),
-                          ),
-                        )
+                              ],
+                            );
+                          }
+                          return CircularProgressIndicator();
+                        },
                       )
                     ],
                   )
                 )
-                
               ],
             )
           )
