@@ -1,23 +1,28 @@
 
-
 class FoodList 
 {
-  final String title;
-  final String body;
+  int userId;
+  int id;
+  String title;
+  String body;
 
-  FoodList
-  (
-    {
-      this.title, this.body
-    }
-  );
+  FoodList({this.userId, this.id, this.title, this.body});
 
-  factory FoodList.fromJson(Map<String , dynamic> json )
+  FoodList.fromJSON(Map<String, dynamic> json) 
   {
-    return FoodList
-    (
-      title: json["title"],
-      body: json["body"],
-    );
+    userId = json['userId'];
+    id = json['id'];
+    title = json['title'];
+    body = json['body'];
+  }
+
+  Map<String, dynamic> toJson() 
+  {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['userId'] = this.userId;
+    data['id'] = this.id;
+    data['title'] = this.title;
+    data['body'] = this.body;
+    return data;
   }
 }

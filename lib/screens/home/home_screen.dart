@@ -71,17 +71,36 @@ class _HomeSceen extends State<HomeScreen>
   // #endregion
 
   // #region FetchData FoodList
+
   final String apiUrl ="https://jsonplaceholder.typicode.com/posts";
 
-  Future<List<dynamic>> getFoodList() async 
+  Future<List<FoodList>> getFoodList() async 
   {
-
-    var result = await http.get(apiUrl);
-    return json.decode(result.body);
-
+    
+    final response = await http.get(apiUrl);
+    if (response.statusCode == 200) 
+    {
+      var parsedFoodList = json.decode(response.body);
+      List<FoodList> _foodList = List<FoodList>();
+      parsedFoodList.forEach
+      (
+        (values) 
+        {
+          _foodList.add(FoodList.fromJSON(values));
+        }
+      );
+      return _foodList;
+    } 
+    else 
+    {
+      // If that call was not successful, throw an error.
+      throw Exception('Failed to load ');
+    }
+    // var result = await http.get(apiUrl);
+    // return json.decode(result.body);
   }
-
   // #endregion
+
   @override
   Widget build (BuildContext context) 
   {
@@ -154,9 +173,10 @@ class _HomeSceen extends State<HomeScreen>
                   (
                     children: <Widget>
                     [
-                      FutureBuilder<List<dynamic>>
+                      FutureBuilder 
                       (
                         future: getFoodList(),
+                        initialData: [],
                         builder: (context , foodSnap)
                         {
                           if(foodSnap.connectionState == ConnectionState.done || foodSnap.hasData)
@@ -201,7 +221,7 @@ class _HomeSceen extends State<HomeScreen>
                                                 alignment: Alignment.center,
                                                 child: Text
                                                 (
-                                                  foodSnap.data[i]["title"].toString(),
+                                                  foodSnap.data[i].title.toString(),
                                                   style: TextStyle
                                                   (
                                                     color: Colors.white,
@@ -217,7 +237,10 @@ class _HomeSceen extends State<HomeScreen>
                               ],
                             );
                           }
-                          return CircularProgressIndicator();
+                          return Center
+                          (
+                            child :  CircularProgressIndicator() 
+                          );
                         },
                       )
                     ],
