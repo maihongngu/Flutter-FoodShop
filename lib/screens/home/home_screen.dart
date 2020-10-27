@@ -1,5 +1,8 @@
 
 import 'package:FoodShopApp/components/constants.dart';
+import 'package:FoodShopApp/screens/home/listItems.dart';
+import 'package:FoodShopApp/screens/home/swipeList.dart';
+import 'package:FoodShopApp/screens/home/titleItems.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'header.dart';
@@ -80,16 +83,29 @@ class _HomeSceen extends State<HomeScreen>
 
       key: _scaffold,
 
-      body: Container
+      body: SingleChildScrollView
       (
-        child: Column
+        child : Column
         (
-          children: <Widget>
+          children : <Widget>
           [
-            headerBody(size: size,)
-          ],
+            HeaderBody(size: size,),
+            Container
+            (
+              child: Column
+              (
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>
+                [
+                  SwipeList(size: size),
+                  TitleItems(),
+                  ListItems(size: size)
+                ],
+              ),
+            )
+          ]
         ),
-      ),
+      )
     );
   }
 }

@@ -3,11 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-class headerBody extends StatefulWidget 
+class HeaderBody extends StatefulWidget 
 {
   final Size size;
 
-  headerBody
+  HeaderBody
   (
     {
       Key key,
@@ -17,14 +17,14 @@ class headerBody extends StatefulWidget
   
   // This widget is the root of your application.
   @override
-  _headerBody createState() => _headerBody(size);
+  _HeaderBody createState() => _HeaderBody(size);
   // #endregion 
 }
 
-class _headerBody extends State<headerBody>
+class _HeaderBody extends State<HeaderBody>
 {
   Size size ;
-  _headerBody(this.size);
+  _HeaderBody(this.size);
 
   @override
   Widget build(BuildContext context )

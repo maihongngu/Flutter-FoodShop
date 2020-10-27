@@ -1,30 +1,42 @@
-// #region Title Items
 import 'package:flutter/cupertino.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-Widget _itemsTitle()
+class TitleItems extends StatefulWidget
 {
-  Container
-  (
-    padding: EdgeInsets.only
-    (
-      top: 20,
-      bottom: 15,
-    ),
-    child :Align
-    (
-      alignment: Alignment.center, 
-      child: Text
-      (
-        "Items",
-        style: TextStyle
-        (
-          color: HexColor("#032535"),
-          fontSize: 25,
-          decoration: TextDecoration.underline
-        ),
-      ),
-    )
-  );
+
+
+  @override
+  _TittleItems createState() => _TittleItems();
+  
 }
-// #endregion
+
+class _TittleItems extends State<TitleItems>
+{
+  @override
+  Widget build(BuildContext context)
+  {
+    return Container
+    (
+      padding: EdgeInsets.only
+      (
+        top: 20,
+        bottom: 15,
+      ),
+      child :Align
+      (
+        alignment: Alignment.center, 
+        child: Text
+        (
+          "Items",
+          style: TextStyle
+          (
+            color: HexColor("#032535"),
+            fontSize: 25,
+            decoration: TextDecoration.underline
+          ),
+        ),
+      )
+    );
+  }
+}
+

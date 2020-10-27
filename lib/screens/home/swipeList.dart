@@ -5,91 +5,113 @@ import 'package:flutter/material.dart';
 
 import 'components/getFoodList.dart';
 
+class SwipeList extends StatefulWidget
+{
+  final Size size;
 
-
-Widget _swipeList (Size size )  
-{ 
-  // #region List Swipe 
-  Container
+  SwipeList
   (
-    height: size.height * 0.25,
-    child: Stack
+    {
+      Key key,
+      @required this.size
+    }
+  );
+
+  _SwipeList createState() => _SwipeList(size);
+}
+
+
+class _SwipeList extends State<SwipeList>
+{
+  Size size;
+  _SwipeList(this.size);
+
+  @override
+  Widget build(BuildContext context )  
+  { 
+    // #region List Swipe 
+    return Container
     (
-      children: <Widget>
-      [
-        FutureBuilder 
-        (
-          future: getFoodList(),
-          initialData: [],
-          builder: (context , foodSnap)
-          {
-            if(foodSnap.connectionState == ConnectionState.done || foodSnap.hasData)
+      height: size.height * 0.25,
+      child: Stack
+      (
+        children: <Widget>
+        [
+          FutureBuilder 
+          (
+            future: getFoodList(),
+            initialData: [],
+            builder: (context , foodSnap)
             {
-              return ListView
-              (
-                padding: EdgeInsets.only
+              if(foodSnap.connectionState == ConnectionState.done || foodSnap.hasData)
+              {
+                return ListView
                 (
-                  left: 10,
-                  right: 10,
-                ),
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                children: <Widget>
-                [
-                  for(int i =0 ; i< foodSnap.data.length ; i++)
-                    Card
-                    (
-                      shape: BeveledRectangleBorder
+                  padding: EdgeInsets.only
+                  (
+                    left: 10,
+                    right: 10,
+                  ),
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  children: <Widget>
+                  [
+                    for(int i =0 ; i< foodSnap.data.length ; i++)
+                      Card
                       (
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      color: kMainColor,
-                      child: Container
-                      (
-                        
-                        width: 150,
-                        decoration: BoxDecoration
+                        shape: BeveledRectangleBorder
                         (
-                          borderRadius: BorderRadius.all(Radius.circular(100))
+                          borderRadius: BorderRadius.circular(15.0),
                         ),
-                        child: Center
+                        color: kMainColor,
+                        child: Container
                         (
-                          child: Stack
+                          
+                          width: 150,
+                          decoration: BoxDecoration
                           (
-                            children: <Widget>
-                            [
-                              Center
-                              (
-                                child: Align
+                            borderRadius: BorderRadius.all(Radius.circular(100))
+                          ),
+                          child: Center
+                          (
+                            child: Stack
+                            (
+                              children: <Widget>
+                              [
+                                Center
                                 (
-                                  alignment: Alignment.center,
-                                  child: Text
+                                  child: Align
                                   (
-                                    foodSnap.data[i].title,
-                                    style: TextStyle
+                                    alignment: Alignment.center,
+                                    child: Text
                                     (
-                                      color: Colors.white,
-                                    ),
+                                      foodSnap.data[i].title,
+                                      style: TextStyle
+                                      (
+                                        color: Colors.white,
+                                      ),
+                                    )
                                   )
                                 )
-                              )
-                            ],
-                          )
+                              ],
+                            )
+                          ),
                         ),
-                      ),
-                    )
-                ],
+                      )
+                  ],
+                );
+              }
+              return Center
+              (
+                child :  CircularProgressIndicator() 
               );
-            }
-            return Center
-            (
-              child :  CircularProgressIndicator() 
-            );
-          },
-        )
-      ],
-    )
-  );
-   // #endregion
+            },
+          )
+        ],
+      )
+    );
+    // #endregion
+  }
 }
+
                   
