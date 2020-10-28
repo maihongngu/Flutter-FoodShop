@@ -39,18 +39,6 @@ class _HomeSceen extends State<HomeScreen>
       actions: 
       [
         searchBar.getSearchAction(context),
-        IconButton
-          (
-            icon: new Icon
-            (
-              Icons.add_shopping_cart ,
-              size: 30,
-            ), 
-            onPressed: () => 
-            {
-
-            },
-          )
       ]
     );
   } 
@@ -83,6 +71,30 @@ class _HomeSceen extends State<HomeScreen>
 
       key: _scaffold,
 
+      floatingActionButton: Stack
+      (
+        alignment: Alignment.bottomRight,
+        children : <Widget>
+        [
+          FloatingActionButton.extended
+          (
+            backgroundColor: kMainColor,
+            label: Align
+            (
+              alignment: Alignment.centerLeft,
+              child: Text("1"),
+            ),
+            onPressed: null,
+            icon : Icon
+            (
+              Icons.add_shopping_cart ,
+              size: 30,
+            ), 
+          )
+        ]
+        
+      ),
+      
       body: SingleChildScrollView
       (
         child : Column

@@ -57,46 +57,57 @@ class _SwipeList extends State<SwipeList>
                   children: <Widget>
                   [
                     for(int i =0 ; i< foodSnap.data.length ; i++)
-                      Card
-                      (
-                        shape: BeveledRectangleBorder
-                        (
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        color: kMainColor,
-                        child: Container
-                        (
-                          
-                          width: 150,
-                          decoration: BoxDecoration
+                      new GestureDetector
+                      ( 
+                        onTap: () 
+                        {
+                          final snackBar = SnackBar
                           (
-                            borderRadius: BorderRadius.all(Radius.circular(100))
+                            content: Text(i.toString()),
+                            
+                          );
+                          Scaffold.of(context).showSnackBar(snackBar);
+                        },
+                        child : Card
+                        (
+                          shape: BeveledRectangleBorder
+                          (
+                            borderRadius: BorderRadius.circular(15.0),
                           ),
-                          child: Center
+                          color: kMainColor,
+                          child: Container
                           (
-                            child: Stack
+                            width: 150,
+                            decoration: BoxDecoration
                             (
-                              children: <Widget>
-                              [
-                                Center
-                                (
-                                  child: Align
+                              borderRadius: BorderRadius.all(Radius.circular(100))
+                            ),
+                            child: Center
+                            (
+                              child: Stack
+                              (
+                                children: <Widget>
+                                [
+                                  Center
                                   (
-                                    alignment: Alignment.center,
-                                    child: Text
+                                    child: Align
                                     (
-                                      foodSnap.data[i].title,
-                                      style: TextStyle
+                                      alignment: Alignment.center,
+                                      child: Text
                                       (
-                                        color: Colors.white,
-                                      ),
+                                        foodSnap.data[i].title,
+                                        style: TextStyle
+                                        (
+                                          color: Colors.white,
+                                        ),
+                                      )
                                     )
                                   )
-                                )
-                              ],
-                            )
+                                ],
+                              )
+                            ),
                           ),
-                        ),
+                        )
                       )
                   ],
                 );
