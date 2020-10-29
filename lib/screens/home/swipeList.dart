@@ -1,30 +1,32 @@
 
 import 'package:FoodShopApp/components/constants.dart';
+import 'package:FoodShopApp/models/foodlist.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'components/getFoodList.dart';
 
 class SwipeList extends StatefulWidget
 {
   final Size size;
-
+  final Future<List<FoodList>> foodList;
   SwipeList
   (
     {
       Key key,
-      @required this.size
+      @required this.size , 
+      this.foodList
     }
   );
 
-  _SwipeList createState() => _SwipeList(size);
+  _SwipeList createState() => _SwipeList(size , foodList);
 }
 
 
 class _SwipeList extends State<SwipeList>
 {
   Size size;
-  _SwipeList(this.size);
+  Future<List<FoodList>> foodList ;
+  _SwipeList(this.size,this.foodList);
 
   @override
   Widget build(BuildContext context )  
@@ -39,7 +41,7 @@ class _SwipeList extends State<SwipeList>
         [
           FutureBuilder 
           (
-            future: getFoodList(),
+            future: foodList,
             initialData: [],
             builder: (context , foodSnap)
             {

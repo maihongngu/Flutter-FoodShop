@@ -4,13 +4,9 @@ import 'package:hexcolor/hexcolor.dart';
 
 class TitleItems extends StatefulWidget
 {
-
-
   @override
   _TittleItems createState() => _TittleItems();
-  
 }
-
 class _TittleItems extends State<TitleItems>
 {
   @override

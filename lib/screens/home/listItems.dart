@@ -8,35 +8,44 @@ import 'components/getFoodList.dart';
 class ListItems extends StatefulWidget 
 {
   final Size size;
+  final Function press;
+  final Future<List<FoodList>> foodList;
   final int number;
   ListItems
   (
     {
       Key key,
-      @required this.size,this.number
+      @required this.size,this.press,this.foodList,this.number
     }
   ) : super ( key : key );
   
   // This widget is the root of your application.
   @override
-  _ListItems createState() => _ListItems(size);
+  _ListItems createState() => _ListItems(size,press,foodList,number);
   // #endregion 
 }
 
 
 class _ListItems extends State<ListItems>
 {
-  List<FoodList> _cartList = List<FoodList>();
-  Size size;
+  void _increment()
+  {
+    setState(() 
+    {
+      number ++ ;  
+    });
+  }
+  int length; 
   int number;
-  _ListItems(this.size);
+  Size size;  
+  Function press;
+  Future<List<FoodList>> foodList;
+  _ListItems(this.size,this.press,this.foodList,this.number);
 
   @override
   Widget build(BuildContext context)
   {
-    int length; 
     
-    List list = [];
 
     return Container
     (
@@ -44,7 +53,7 @@ class _ListItems extends State<ListItems>
       child:  FutureBuilder
       (
         initialData: [],
-        future: getFoodList(),
+        future: foodList,
         builder: (context , foodSnap)
         {
           if(foodSnap.hasData || foodSnap.connectionState == ConnectionState.done)
@@ -105,13 +114,7 @@ class _ListItems extends State<ListItems>
                               ),
                               onPressed: () 
                               {
-                                list.add(foodSnap.data[i]);
-                                // listCart.albumId = foodSnap.data[i].albumId;
-                                // listCart.title = foodSnap.data[i].title;
-                                // listCart.url = foodSnap.data[i].url;
-                                // listCart.thumbnailUrl = foodSnap.data[i].thumbnailUrl;
-                                _cartList.add(foodSnap.data[i]);
-                                print(_cartList.length);
+                                _increment();
                               },
                             )
                           )

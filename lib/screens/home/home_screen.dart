@@ -1,5 +1,8 @@
 
 import 'package:FoodShopApp/components/constants.dart';
+import 'package:FoodShopApp/models/foodlist.dart';
+import 'package:FoodShopApp/screens/home/components/getFoodList.dart';
+import 'package:FoodShopApp/screens/home/components/getlistCart.dart';
 import 'package:FoodShopApp/screens/home/listItems.dart';
 import 'package:FoodShopApp/screens/home/swipeList.dart';
 import 'package:FoodShopApp/screens/home/titleItems.dart';
@@ -10,14 +13,6 @@ import 'header.dart';
 
 class HomeScreen extends StatefulWidget
 {
-
-  HomeScreen
-  (
-    {
-      Key key,
-    }
-  ) : super ( key : key );
-
   @override
   _HomeSceen createState() => _HomeSceen();
 }
@@ -26,8 +21,6 @@ class _HomeSceen extends State<HomeScreen>
 {
   // #region property
   SearchBar searchBar;
-
-  int number ;
   // #endregion
 
   // #region Appbar custom
@@ -63,6 +56,18 @@ class _HomeSceen extends State<HomeScreen>
     );
   }
   // #endregion
+  
+  //State
+  int number ;
+  Future<List<FoodList>> list = getFoodList();
+
+  @override
+  void initState()
+  {
+    super.initState();
+    number = getlistCart();
+  }
+
 
   @override
   Widget build (BuildContext context) 
@@ -120,9 +125,18 @@ class _HomeSceen extends State<HomeScreen>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>
                 [
-                  SwipeList(size: size),
+                  SwipeList(size: size , foodList: list,),
                   TitleItems(),
-                  ListItems(size: size)
+                  ListItems
+                  (
+                    size: size,
+                    // press: ()
+                    // {
+                    //   _increment(); 
+                    // },
+                    foodList: list,
+                    number: number,
+                  ) 
                 ],
               ),
             )
