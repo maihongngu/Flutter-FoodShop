@@ -1,4 +1,5 @@
 import 'package:FoodShopApp/components/constants.dart';
+import 'package:FoodShopApp/models/foodlist.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'components/getFoodList.dart';
@@ -7,12 +8,12 @@ import 'components/getFoodList.dart';
 class ListItems extends StatefulWidget 
 {
   final Size size;
-
+  final int number;
   ListItems
   (
     {
       Key key,
-      @required this.size
+      @required this.size,this.number
     }
   ) : super ( key : key );
   
@@ -25,14 +26,18 @@ class ListItems extends StatefulWidget
 
 class _ListItems extends State<ListItems>
 {
+  List<FoodList> _cartList = List<FoodList>();
   Size size;
-
+  int number;
   _ListItems(this.size);
 
   @override
   Widget build(BuildContext context)
   {
     int length; 
+    
+    List list = [];
+
     return Container
     (
       height: size.height * 0.8,  
@@ -84,18 +89,31 @@ class _ListItems extends State<ListItems>
                           Image.network
                           (
                             foodSnap.data[i].url.toString() ,
-                            height: MediaQuery.of(context).size.height * 0.25 - 50,
-                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height * 0.25 - 100,
+                            width: MediaQuery.of(context).size.width -20,
                           ),
                           Spacer(),
                           Align
                           (
                             alignment: Alignment.bottomCenter,
-                            child: Icon
+                            child: IconButton
                             (
-                              Icons.add_shopping_cart,
-                              color: kButtonColor,
-                            ),
+                              icon: Icon
+                              (
+                                Icons.add_shopping_cart,
+                                color: kButtonColor,
+                              ),
+                              onPressed: () 
+                              {
+                                list.add(foodSnap.data[i]);
+                                // listCart.albumId = foodSnap.data[i].albumId;
+                                // listCart.title = foodSnap.data[i].title;
+                                // listCart.url = foodSnap.data[i].url;
+                                // listCart.thumbnailUrl = foodSnap.data[i].thumbnailUrl;
+                                _cartList.add(foodSnap.data[i]);
+                                print(_cartList.length);
+                              },
+                            )
                           )
                         ],
                       ),

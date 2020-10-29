@@ -7,18 +7,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'header.dart';
 
+
 class HomeScreen extends StatefulWidget
 {
-  @override 
+
+  HomeScreen
+  (
+    {
+      Key key,
+    }
+  ) : super ( key : key );
+
+  @override
   _HomeSceen createState() => _HomeSceen();
 }
 
 class _HomeSceen extends State<HomeScreen>
 {
   // #region property
-
   SearchBar searchBar;
 
+  int number ;
   // #endregion
 
   // #region Appbar custom
@@ -53,7 +62,6 @@ class _HomeSceen extends State<HomeScreen>
       buildDefaultAppBar: appbar
     );
   }
-  
   // #endregion
 
   @override
@@ -63,14 +71,13 @@ class _HomeSceen extends State<HomeScreen>
     Size size = MediaQuery.of(context).size;
     GlobalKey<ScaffoldState> _scaffold = GlobalKey();
     // #endregion
-    
+
     //Start coding ...
     return new Scaffold
     (
       appBar:searchBar.build(context),
 
       key: _scaffold,
-
       floatingActionButton: Stack
       (
         alignment: Alignment.bottomRight,
@@ -82,7 +89,10 @@ class _HomeSceen extends State<HomeScreen>
             label: Align
             (
               alignment: Alignment.centerLeft,
-              child: Text("1"),
+              child: Text
+              (
+                number.toString()
+              ),
             ),
             onPressed: null,
             icon : Icon
@@ -94,6 +104,7 @@ class _HomeSceen extends State<HomeScreen>
         ]
         
       ),
+      
       
       body: SingleChildScrollView
       (
