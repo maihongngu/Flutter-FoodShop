@@ -21,6 +21,10 @@ class _HomeSceen extends State<HomeScreen>
 {
   // #region property
   SearchBar searchBar;
+  Future<List<FoodList>> list = getFoodList();
+  int number ;
+  
+  GlobalKey<ScaffoldState> _scaffold = GlobalKey();
   // #endregion
 
   // #region Appbar custom
@@ -58,8 +62,56 @@ class _HomeSceen extends State<HomeScreen>
   // #endregion
   
   //State
-  int number ;
-  Future<List<FoodList>> list = getFoodList();
+  Widget fab = FloatingActionButton.extended
+  (
+    backgroundColor: kMainColor,
+    onPressed: () => 
+    {
+
+    },
+    label: Align
+    (
+      alignment: Alignment.centerLeft,
+      child: Text
+      (
+        getlistCart().toString()
+      ),
+    ),
+    icon : Icon
+    (
+      Icons.add_shopping_cart ,
+      size: 30,
+    ),
+  ); 
+  
+  _fabChange() async
+  {
+    setState(() =>
+    {
+      fab = FloatingActionButton.extended
+      (
+        backgroundColor: kMainColor,
+        key: UniqueKey(),
+        onPressed: () => 
+        {
+        },
+        label: Align
+        (
+          alignment: Alignment.centerLeft,
+          child: Text
+          (
+            getlistCart().toString()
+          ),
+        ),
+        icon : Icon
+        (
+          Icons.add_shopping_cart ,
+          size: 30,
+        ),
+      )
+    });
+  }
+
 
   @override
   void initState()
@@ -68,47 +120,43 @@ class _HomeSceen extends State<HomeScreen>
     number = getlistCart();
   }
 
-
   @override
   Widget build (BuildContext context) 
   {
-    // #region Property
     Size size = MediaQuery.of(context).size;
-    GlobalKey<ScaffoldState> _scaffold = GlobalKey();
-    // #endregion
-
     //Start coding ...
     return new Scaffold
     (
       appBar:searchBar.build(context),
 
       key: _scaffold,
-      floatingActionButton: Stack
-      (
-        alignment: Alignment.bottomRight,
-        children : <Widget>
-        [
-          FloatingActionButton.extended
-          (
-            backgroundColor: kMainColor,
-            label: Align
-            (
-              alignment: Alignment.centerLeft,
-              child: Text
-              (
-                number.toString()
-              ),
-            ),
-            onPressed: null,
-            icon : Icon
-            (
-              Icons.add_shopping_cart ,
-              size: 30,
-            ), 
-          )
-        ]
-        
-      ),
+      floatingActionButton: fab,
+      // floatingActionButton: Stack
+      // (
+      //   alignment: Alignment.bottomRight,
+      //   children : <Widget>
+      //   [
+      //     FloatingActionButton.extended
+      //     (
+      //       backgroundColor: kMainColor,
+      //       label: Align
+      //       (
+      //         alignment: Alignment.centerLeft,
+      //         child: Text
+      //         (
+      //           number.toString()
+      //         ),
+      //       ),
+      //       onPressed: null,
+      //       icon : Icon
+      //       (
+      //         Icons.add_shopping_cart ,
+      //         size: 30,
+      //       ), 
+      //     )
+      //   ]
+      //   
+      // ),
       
       
       body: SingleChildScrollView
@@ -130,10 +178,10 @@ class _HomeSceen extends State<HomeScreen>
                   ListItems
                   (
                     size: size,
-                    // press: ()
-                    // {
-                    //   _increment(); 
-                    // },
+                    press: () => 
+                    {
+                      _fabChange()
+                    },
                     foodList: list,
                     number: number,
                   ) 

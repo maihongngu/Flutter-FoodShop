@@ -1,6 +1,7 @@
 import 'dart:core';
 
 import 'package:FoodShopApp/models/foodlist.dart';
+import 'package:flutter/cupertino.dart';
 
 List<FoodList> _cartList = List<FoodList>();
 
@@ -10,7 +11,8 @@ addtoCart(dynamic _temp)
   
   print (_cartList.length);
 }
-getlistCart()
+int getlistCart()
 {
   return _cartList.length;
+  //_cartList.length;
 }

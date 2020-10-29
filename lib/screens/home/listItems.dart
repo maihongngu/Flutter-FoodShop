@@ -1,52 +1,62 @@
 import 'package:FoodShopApp/components/constants.dart';
 import 'package:FoodShopApp/models/foodlist.dart';
+import 'package:FoodShopApp/screens/home/components/getlistCart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'components/getFoodList.dart';
 
 
-class ListItems extends StatefulWidget 
+// class ListItems extends StatefulWidget 
+// {
+//   final Size size;
+//   final Function press;
+//   final Future<List<FoodList>> foodList;
+//   final int number;
+//   final Widget fab;
+//   ListItems
+//   (
+//     {
+//       Key key,
+//       @required this.size,
+//       this.press,
+//       @required this.foodList,
+//       this.number,
+//       this.fab
+//     }
+//   ) : super ( key : key );
+//   
+//   // This widget is the root of your application.
+//   @override
+//   _ListItems createState() => _ListItems(size,press,foodList,number,fab);
+//   // #endregion 
+// }
+
+
+class ListItems extends StatelessWidget
 {
-  final Size size;
-  final Function press;
-  final Future<List<FoodList>> foodList;
-  final int number;
-  ListItems
-  (
-    {
-      Key key,
-      @required this.size,this.press,this.foodList,this.number
-    }
-  ) : super ( key : key );
-  
-  // This widget is the root of your application.
-  @override
-  _ListItems createState() => _ListItems(size,press,foodList,number);
-  // #endregion 
-}
-
-
-class _ListItems extends State<ListItems>
-{
-  void _increment()
-  {
-    setState(() 
-    {
-      number ++ ;  
-    });
-  }
+  Widget fab;
   int length; 
   int number;
   Size size;  
   Function press;
   Future<List<FoodList>> foodList;
-  _ListItems(this.size,this.press,this.foodList,this.number);
+  ListItems
+  (
+    {
+      Key key,
+      this.size,
+      this.press,
+      this.foodList,
+      this.number,
+      this.fab
+    }
+  ) : super ( key : key) ;
+
+
+  // }
 
   @override
   Widget build(BuildContext context)
   {
-    
-
     return Container
     (
       height: size.height * 0.8,  
@@ -112,9 +122,11 @@ class _ListItems extends State<ListItems>
                                 Icons.add_shopping_cart,
                                 color: kButtonColor,
                               ),
-                              onPressed: () 
+                              onPressed: () =>
                               {
-                                _increment();
+                                addtoCart(foodSnap.data[i]),
+                                
+                                press()
                               },
                             )
                           )
