@@ -1,6 +1,6 @@
-import 'package:FoodShopApp/components/constants.dart';
+
 import 'package:FoodShopApp/models/foodlist.dart';
-import 'package:FoodShopApp/screens/home/components/getlistCart.dart';
+import 'package:FoodShopApp/screens/home/cardlist.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -41,20 +41,6 @@ class _ListItems extends State<ListItems>
   Future<List<FoodList>> foodList;
 
   _ListItems(this.size,this.press,this.foodList,this.number,this.fab);
-  // ListItems
-  // (
-  //   {
-  //     Key key,
-  //     this.size,
-  //     this.press,
-  //     this.foodList,
-  //     this.number,
-  //     this.fab
-  //   }
-  // ) : super ( key : key) ;
-
-
-  // }
 
   @override
   Widget build(BuildContext context)
@@ -89,116 +75,146 @@ class _ListItems extends State<ListItems>
               children: <Widget>
               [
                 for( int i =0 ; i < length ; i ++)
-                  Card
+                  GestureDetector
                   (
-                    shape: BeveledRectangleBorder
-                    (
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    color: kMainColor,
-                    child: Container
-                    (
-                      width: 150,
-                      decoration: BoxDecoration
+                    onTap: () => 
+                    {
+                      showDialog
                       (
-                        borderRadius: BorderRadius.all(Radius.circular(100))
-                      ),
-                      child: Column
-                      (
-                        children: <Widget>
-                        [
-                          Image.network
+                        context: context,
+                        builder:  ( context  )
+                        {
+                          return AlertDialog
                           (
-                            foodSnap.data[i].url.toString() ,
-                            height: MediaQuery.of(context).size.height * 0.25 - 100,
-                            width: MediaQuery.of(context).size.width -20,
-                          ),
-                          Spacer(),
-                          Center
-                          (
-                            child : Row
+                            content: CardItems
                             (
-                              children: <Widget>
-                              [
-                                Spacer(),
-                                SizedBox
-                                (
-                                  width: MediaQuery.of(context).size.width * 0.175 -30,
-                                  child: RaisedButton
-                                  (
-                                    color: kButtonColor,
-                                    shape: RoundedRectangleBorder
-                                    (
-                                      borderRadius: BorderRadius.circular(100)
-                                    ),
-                                    child: Align
-                                    (
-                                      alignment: Alignment.center,
-                                      child: Text
-                                      (
-                                        "+",
-                                        style: TextStyle
-                                        (
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    ),
-                                    onPressed: () =>
-                                    {
-                                      addtoCart(foodSnap.data[i]),
-                                      press()
-                                    },
-                                  ),
-                                ),
-                                Spacer(),
-                                Text
-                                (
-                                  getItemInCart(foodSnap.data[i].id).toString(),
-                                  style: TextStyle
-                                  (
-                                    color: Colors.white,
-                                    fontSize: 15
-                                  ),
-                                ),
-                                Spacer(),
-                                SizedBox
-                                (
-                                  width: MediaQuery.of(context).size.width * 0.175 -30,
-                                  child: RaisedButton
-                                  (
-                                    color: kButtonColor,
-                                    shape: RoundedRectangleBorder
-                                    (
-                                      
-                                      borderRadius: BorderRadius.circular(36)
-                                    ),
-                                    child: Align
-                                    (
-                                      alignment: Alignment.center,
-                                      child: Text
-                                      (
-                                        "-",
-                                        style: TextStyle
-                                        (
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    ),
-                                    onPressed: () =>
-                                    {
-                                      removefromcart(foodSnap.data[i].id),
-                                      press()
-                                    },
-                                  ),
-                                ),
-                                Spacer(),
-                              ],
-                            ),
-                          )
-                        ],
+                              key: UniqueKey(),
+                              foodSnap: foodSnap,
+                              index: i,
+                              press: press,
+                            )
+                          );
+                        }
                       )
+                    },
+                    child: CardItems
+                    (
+                      foodSnap: foodSnap,
+                      index: i,
+                      press: press,
                     ),
-                  )
+                //     child: Card
+                //     (
+                //       shape: BeveledRectangleBorder
+                //       (
+                //         borderRadius: BorderRadius.circular(15.0),
+                //       ),
+                //       color: kMainColor,
+                //       child: Container
+                //       (
+                //         width: 150,
+                //         decoration: BoxDecoration
+                //         (
+                //           borderRadius: BorderRadius.all(Radius.circular(100))
+                //         ),
+                //         child: Column
+                //         (
+                //           children: <Widget>
+                //           [
+                //             Image.network
+                //             (
+                //               foodSnap.data[i].url.toString() ,
+                //               height: MediaQuery.of(context).size.height * 0.25 - 100,
+                //               width: MediaQuery.of(context).size.width -20,
+                //             ),
+                //             Spacer(),
+                //             Center
+                //             (
+                //               child : Row
+                //               (
+                //                 children: <Widget>
+                //                 [
+                //                   Spacer(),
+                //                   SizedBox
+                //                   (
+                //                     width: MediaQuery.of(context).size.width * 0.175 -30,
+                //                     child: RaisedButton
+                //                     (
+                //                       color: kButtonColor,
+                //                       shape: RoundedRectangleBorder
+                //                       (
+                //                         borderRadius: BorderRadius.circular(100)
+                //                       ),
+                //                       child: Align
+                //                       (
+                //                         alignment: Alignment.center,
+                //                         child: Text
+                //                         (
+                //                           "+",
+                //                           style: TextStyle
+                //                           (
+                //                             fontSize: 16,
+                //                           ),
+                //                         ),
+                //                       ),
+                //                       onPressed: () =>
+                //                       {
+                //                         addtoCart(foodSnap.data[i]),
+                //                         press()
+                //                       },
+                //                     ),
+                //                   ),
+                //                   Spacer(),
+                //                   Text
+                //                   (
+                //                     getItemInCart(foodSnap.data[i].id).toString(),
+                //                     style: TextStyle
+                //                     (
+                //                       color: Colors.white,
+                //                       fontSize: 15
+                //                     ),
+                //                   ),
+                //                   Spacer(),
+                //                   SizedBox
+                //                   (
+                //                     width: MediaQuery.of(context).size.width * 0.175 -30,
+                //                     child: RaisedButton
+                //                     (
+                //                       color: kButtonColor,
+                //                       shape: RoundedRectangleBorder
+                //                       (
+                //                         
+                //                         borderRadius: BorderRadius.circular(36)
+                //                       ),
+                //                       child: Align
+                //                       (
+                //                         alignment: Alignment.center,
+                //                         child: Text
+                //                         (
+                //                           "-",
+                //                           style: TextStyle
+                //                           (
+                //                             fontSize: 16,
+                //                           ),
+                //                         ),
+                //                       ),
+                //                       onPressed: () =>
+                //                       {
+                //                         removefromcart(foodSnap.data[i].id),
+                //                         press()
+                //                       },
+                //                     ),
+                //                   ),
+                //                   Spacer(),
+                //                 ],
+                //               ),
+                //             )
+                //           ],
+                //         )
+                //       ),
+                //     ),
+                //  
+                 )
               ],
             );
           }
