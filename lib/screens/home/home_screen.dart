@@ -131,34 +131,6 @@ class _HomeSceen extends State<HomeScreen>
 
       key: _scaffold,
       floatingActionButton: fab,
-      // floatingActionButton: Stack
-      // (
-      //   alignment: Alignment.bottomRight,
-      //   children : <Widget>
-      //   [
-      //     FloatingActionButton.extended
-      //     (
-      //       backgroundColor: kMainColor,
-      //       label: Align
-      //       (
-      //         alignment: Alignment.centerLeft,
-      //         child: Text
-      //         (
-      //           number.toString()
-      //         ),
-      //       ),
-      //       onPressed: null,
-      //       icon : Icon
-      //       (
-      //         Icons.add_shopping_cart ,
-      //         size: 30,
-      //       ), 
-      //     )
-      //   ]
-      //   
-      // ),
-      
-      
       body: SingleChildScrollView
       (
         child : Column
@@ -184,7 +156,9 @@ class _HomeSceen extends State<HomeScreen>
                     },
                     foodList: list,
                     number: number,
-                  ) 
+                  ),
+                  
+                   
                 ],
               ),
             )

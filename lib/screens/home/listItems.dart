@@ -5,33 +5,33 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 
-// class ListItems extends StatefulWidget 
-// {
-//   final Size size;
-//   final Function press;
-//   final Future<List<FoodList>> foodList;
-//   final int number;
-//   final Widget fab;
-//   ListItems
-//   (
-//     {
-//       Key key,
-//       @required this.size,
-//       this.press,
-//       @required this.foodList,
-//       this.number,
-//       this.fab
-//     }
-//   ) : super ( key : key );
-//   
-//   // This widget is the root of your application.
-//   @override
-//   _ListItems createState() => _ListItems(size,press,foodList,number,fab);
-//   // #endregion 
-// }
+class ListItems extends StatefulWidget 
+{
+  final Size size;
+  final Function press;
+  final Future<List<FoodList>> foodList;
+  final int number;
+  final Widget fab;
+  ListItems
+  (
+    {
+      Key key,
+      @required this.size,
+      this.press,
+      @required this.foodList,
+      this.number,
+      this.fab
+    }
+  ) : super ( key : key );
+  
+  // This widget is the root of your application.
+  @override
+  _ListItems createState() => _ListItems(size,press,foodList,number,fab);
+  // #endregion 
+}
 
 
-class ListItems extends StatelessWidget
+class _ListItems extends State<ListItems>
 {
   Widget fab;
   int length; 
@@ -39,17 +39,19 @@ class ListItems extends StatelessWidget
   Size size;  
   Function press;
   Future<List<FoodList>> foodList;
-  ListItems
-  (
-    {
-      Key key,
-      this.size,
-      this.press,
-      this.foodList,
-      this.number,
-      this.fab
-    }
-  ) : super ( key : key) ;
+
+  _ListItems(this.size,this.press,this.foodList,this.number,this.fab);
+  // ListItems
+  // (
+  //   {
+  //     Key key,
+  //     this.size,
+  //     this.press,
+  //     this.foodList,
+  //     this.number,
+  //     this.fab
+  //   }
+  // ) : super ( key : key) ;
 
 
   // }
@@ -112,27 +114,90 @@ class ListItems extends StatelessWidget
                             width: MediaQuery.of(context).size.width -20,
                           ),
                           Spacer(),
-                          Align
+                          Center
                           (
-                            alignment: Alignment.bottomCenter,
-                            child: IconButton
+                            child : Row
                             (
-                              icon: Icon
-                              (
-                                Icons.add_shopping_cart,
-                                color: kButtonColor,
-                              ),
-                              onPressed: () =>
-                              {
-                                addtoCart(foodSnap.data[i]),
-                                
-                                press()
-                              },
-                            )
+                              children: <Widget>
+                              [
+                                Spacer(),
+                                SizedBox
+                                (
+                                  width: MediaQuery.of(context).size.width * 0.175 -30,
+                                  child: RaisedButton
+                                  (
+                                    color: kButtonColor,
+                                    shape: RoundedRectangleBorder
+                                    (
+                                      borderRadius: BorderRadius.circular(100)
+                                    ),
+                                    child: Align
+                                    (
+                                      alignment: Alignment.center,
+                                      child: Text
+                                      (
+                                        "+",
+                                        style: TextStyle
+                                        (
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ),
+                                    onPressed: () =>
+                                    {
+                                      addtoCart(foodSnap.data[i]),
+                                      press()
+                                    },
+                                  ),
+                                ),
+                                Spacer(),
+                                Text
+                                (
+                                  getItemInCart(foodSnap.data[i].id).toString(),
+                                  style: TextStyle
+                                  (
+                                    color: Colors.white,
+                                    fontSize: 15
+                                  ),
+                                ),
+                                Spacer(),
+                                SizedBox
+                                (
+                                  width: MediaQuery.of(context).size.width * 0.175 -30,
+                                  child: RaisedButton
+                                  (
+                                    color: kButtonColor,
+                                    shape: RoundedRectangleBorder
+                                    (
+                                      
+                                      borderRadius: BorderRadius.circular(36)
+                                    ),
+                                    child: Align
+                                    (
+                                      alignment: Alignment.center,
+                                      child: Text
+                                      (
+                                        "-",
+                                        style: TextStyle
+                                        (
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ),
+                                    onPressed: () =>
+                                    {
+                                      removefromcart(foodSnap.data[i].id),
+                                      press()
+                                    },
+                                  ),
+                                ),
+                                Spacer(),
+                              ],
+                            ),
                           )
                         ],
-                      ),
-                    )
+                      )
+                    ),
                   )
               ],
             );
