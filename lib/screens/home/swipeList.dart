@@ -79,35 +79,50 @@ class _SwipeList extends State<SwipeList>
                           color: kMainColor,
                           child: Container
                           (
-                            width: 150,
+                            // margin: EdgeInsets.only
+                            // (
+                            //   top: 0
+                            // ),
+                            width: MediaQuery.of(context).size.width - 50,
                             decoration: BoxDecoration
                             (
-                              borderRadius: BorderRadius.all(Radius.circular(100))
-                            ),
-                            child: Center
-                            (
-                              child: Stack
+                              image: DecorationImage
                               (
-                                children: <Widget>
-                                [
-                                  Center
-                                  (
-                                    child: Align
-                                    (
-                                      alignment: Alignment.center,
-                                      child: Text
-                                      (
-                                        foodSnap.data[i].title,
-                                        style: TextStyle
-                                        (
-                                          color: Colors.white,
-                                        ),
-                                      )
-                                    )
-                                  )
-                                ],
-                              )
+                                image: NetworkImage(foodSnap.data[i].image.toString() ,),
+                                fit: BoxFit.fill
+                              ),
+                              borderRadius: BorderRadius.all(Radius.circular(36))
                             ),
+                            // child: Column
+                            // (
+                            //   children: <Widget>
+                            //   [
+                            //     // Image.network
+                            //     // (
+                            //     //   
+                            //     //   height: MediaQuery.of(context).size.height * 0.17,
+                            //     //   //width: MediaQuery.of(context).size.width ,
+                            //     // ),
+                            //     Spacer(),
+                            //     Center
+                            //     (
+                            //       child: Align
+                            //       (
+                            //         alignment: Alignment.center,
+                            //         child: Text
+                            //         (
+                            //           foodSnap.data[i].title,
+                            //           style: TextStyle
+                            //           (
+                            //             color: Colors.white,
+                            //             fontSize: 25
+                            //           ),
+                            //         )
+                            //       )
+                            //     ),
+                            //     
+                            //   ],
+                            // )
                           ),
                         )
                       )

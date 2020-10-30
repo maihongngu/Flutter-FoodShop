@@ -1,4 +1,5 @@
 import 'package:FoodShopApp/models/category.dart';
+import 'package:FoodShopApp/screens/detail/detail_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -57,14 +58,14 @@ class _TittleItems extends State<TitleItems>
                 (
                   onTap: () => 
                   {
-                    // Navigator.push
-                    // (
-                    //   context, 
-                    //   MaterialPageRoute
-                    //   (
-                    //     builder: (context) => MainDetail(),
-                    //   )
-                    // )
+                    Navigator.push
+                    (
+                      context, 
+                      MaterialPageRoute
+                      (
+                        builder: (context) => MainDetail(),
+                      )
+                    )
                   },
                   child: Align
                   (
@@ -82,7 +83,8 @@ class _TittleItems extends State<TitleItems>
                   )
                 );
               }
-              return Align
+            }
+            return Align
               (
                 alignment: Alignment.centerRight, 
                 child: Text
@@ -96,7 +98,6 @@ class _TittleItems extends State<TitleItems>
                   ),
                 )
               );
-            }
           } ,
         )
       ]

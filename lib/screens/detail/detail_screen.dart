@@ -1,6 +1,6 @@
 import 'package:FoodShopApp/components/constants.dart';
 import 'package:FoodShopApp/screens/detail/detailheader.dart';
-import 'package:FoodShopApp/components/getlistCart.dart';
+import 'package:FoodShopApp/components/getCart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';

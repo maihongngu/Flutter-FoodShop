@@ -1,5 +1,4 @@
-
-import 'package:FoodShopApp/models/category.dart';
+import 'package:FoodShopApp/models/products.dart';
 import 'package:FoodShopApp/screens/home/cardlist.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +8,7 @@ class ListItems extends StatefulWidget
 {
   final Size size;
   final Function press;
-  final Future<List<Category>> category;
+  final Future<List<Products>> products;
   final int number;
   final Widget fab;
   ListItems
@@ -18,7 +17,7 @@ class ListItems extends StatefulWidget
       Key key,
       @required this.size,
       this.press,
-      @required this.category,
+      @required this.products,
       this.number,
       this.fab
     }
@@ -26,7 +25,7 @@ class ListItems extends StatefulWidget
   
   // This widget is the root of your application.
   @override
-  _ListItems createState() => _ListItems(size,press,category,number,fab);
+  _ListItems createState() => _ListItems(size,press,products,number,fab);
   // #endregion 
 }
 
@@ -38,9 +37,9 @@ class _ListItems extends State<ListItems>
   int number;
   Size size;  
   Function press;
-  Future<List<Category>> category;
+  Future<List<Products>> products;
 
-  _ListItems(this.size,this.press,this.category,this.number,this.fab);
+  _ListItems(this.size,this.press,this.products,this.number,this.fab);
 
   @override
   Widget build(BuildContext context)
@@ -51,7 +50,7 @@ class _ListItems extends State<ListItems>
       child:  FutureBuilder
       ( 
         initialData: [],
-        future: category,
+        future: products,
         builder: (context , foodSnap)
         {
           if(foodSnap.hasData || foodSnap.connectionState == ConnectionState.done)
@@ -103,117 +102,6 @@ class _ListItems extends State<ListItems>
                       index: i,
                       press: press,
                     ),
-                //     child: Card
-                //     (
-                //       shape: BeveledRectangleBorder
-                //       (
-                //         borderRadius: BorderRadius.circular(15.0),
-                //       ),
-                //       color: kMainColor,
-                //       child: Container
-                //       (
-                //         width: 150,
-                //         decoration: BoxDecoration
-                //         (
-                //           borderRadius: BorderRadius.all(Radius.circular(100))
-                //         ),
-                //         child: Column
-                //         (
-                //           children: <Widget>
-                //           [
-                //             Image.network
-                //             (
-                //               foodSnap.data[i].url.toString() ,
-                //               height: MediaQuery.of(context).size.height * 0.25 - 100,
-                //               width: MediaQuery.of(context).size.width -20,
-                //             ),
-                //             Spacer(),
-                //             Center
-                //             (
-                //               child : Row
-                //               (
-                //                 children: <Widget>
-                //                 [
-                //                   Spacer(),
-                //                   SizedBox
-                //                   (
-                //                     width: MediaQuery.of(context).size.width * 0.175 -30,
-                //                     child: RaisedButton
-                //                     (
-                //                       color: kButtonColor,
-                //                       shape: RoundedRectangleBorder
-                //                       (
-                //                         borderRadius: BorderRadius.circular(100)
-                //                       ),
-                //                       child: Align
-                //                       (
-                //                         alignment: Alignment.center,
-                //                         child: Text
-                //                         (
-                //                           "+",
-                //                           style: TextStyle
-                //                           (
-                //                             fontSize: 16,
-                //                           ),
-                //                         ),
-                //                       ),
-                //                       onPressed: () =>
-                //                       {
-                //                         addtoCart(foodSnap.data[i]),
-                //                         press()
-                //                       },
-                //                     ),
-                //                   ),
-                //                   Spacer(),
-                //                   Text
-                //                   (
-                //                     getItemInCart(foodSnap.data[i].id).toString(),
-                //                     style: TextStyle
-                //                     (
-                //                       color: Colors.white,
-                //                       fontSize: 15
-                //                     ),
-                //                   ),
-                //                   Spacer(),
-                //                   SizedBox
-                //                   (
-                //                     width: MediaQuery.of(context).size.width * 0.175 -30,
-                //                     child: RaisedButton
-                //                     (
-                //                       color: kButtonColor,
-                //                       shape: RoundedRectangleBorder
-                //                       (
-                //                         
-                //                         borderRadius: BorderRadius.circular(36)
-                //                       ),
-                //                       child: Align
-                //                       (
-                //                         alignment: Alignment.center,
-                //                         child: Text
-                //                         (
-                //                           "-",
-                //                           style: TextStyle
-                //                           (
-                //                             fontSize: 16,
-                //                           ),
-                //                         ),
-                //                       ),
-                //                       onPressed: () =>
-                //                       {
-                //                         removefromcart(foodSnap.data[i].id),
-                //                         press()
-                //                       },
-                //                     ),
-                //                   ),
-                //                   Spacer(),
-                //                 ],
-                //               ),
-                //             )
-                //           ],
-                //         )
-                //       ),
-                //     ),
-                //  
                  )
               ],
             );

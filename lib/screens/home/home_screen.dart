@@ -1,7 +1,8 @@
 
 import 'package:FoodShopApp/components/constants.dart';
 import 'package:FoodShopApp/components/getCategories.dart';
-import 'package:FoodShopApp/components/getlistCart.dart';
+import 'package:FoodShopApp/components/getProducts.dart';
+import 'package:FoodShopApp/components/getCart.dart';
 import 'package:FoodShopApp/models/category.dart';
 import 'package:FoodShopApp/screens/home/listItems.dart';
 import 'package:FoodShopApp/screens/home/swipeList.dart';
@@ -22,7 +23,8 @@ class HomeScreen extends StatefulWidget
 class _HomeSceen extends State<HomeScreen>
 {
   // #region property
-  Future<List<Category>> list = getCategories();
+  Future<List<Category>> listcategories = getCategories();
+  List<Category> _listcategories = List<Category>();
   int number ;
   GlobalKey<ScaffoldState> _scaffold = GlobalKey();
   // #endregion
@@ -92,9 +94,13 @@ class _HomeSceen extends State<HomeScreen>
     });
   }
   
+  //end region
+
+
   // #region State
     void initState()
     {
+      listcategories = getCategories();
       super.initState();
     }
   // #endregion
@@ -124,8 +130,10 @@ class _HomeSceen extends State<HomeScreen>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>
                 [
-                  SwipeList(size: size , category: list,),
-                  TitleItems(category: list,),
+                  SwipeList(size: size , category: listcategories,),
+
+                  TitleItems(category: listcategories,),
+
                   ListItems
                   (
                     size: size,
@@ -133,9 +141,9 @@ class _HomeSceen extends State<HomeScreen>
                     {
                       _fabChange()
                     },
-                    category: list,
+                    products: getProducts(_listcategories.asMap()[0].id,""),
                     number: number,
-                  ),
+                  )
                 ],
               ),
             )

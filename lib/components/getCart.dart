@@ -1,8 +1,9 @@
 import 'dart:core';
 
-import 'package:FoodShopApp/models/category.dart';
 
-List<Category> _cartList = List<Category>();
+import 'package:FoodShopApp/models/products.dart';
+
+List<Products> _cartList = List<Products>();
 
 addtoCart(dynamic _tempList)
 {
