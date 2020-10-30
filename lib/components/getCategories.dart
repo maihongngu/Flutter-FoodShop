@@ -1,27 +1,26 @@
 import 'dart:convert';
 
-import 'package:FoodShopApp/models/foodlist.dart';
+import 'package:FoodShopApp/models/category.dart';
 import 'package:http/http.dart' as http;
 
-final String apiUrl ="https://jsonplaceholder.typicode.com/photos";
+final String apiUrl ="http://5f96864411ab98001603ac4b.mockapi.io/Categories";
 
-Future<List<FoodList>> getFoodList() async 
+Future<List<Category>> getCategories() async 
 {
-  
   final response = await http.get(apiUrl);
   if (response.statusCode == 200) 
   {
-    var parsedFoodList = json.decode(response.body);
+    var parsedCategory = json.decode(response.body);
     //fetch api to model
-    List<FoodList> _foodList = List<FoodList>();
-    parsedFoodList.forEach
+    List<Category> _category = List<Category>();
+    parsedCategory.forEach
     (
       (values) 
       {
-        _foodList.add(FoodList.fromJSON(values));
+        _category.add(Category.fromJSON(values));
       }
     );
-    return _foodList;
+    return _category;
   } 
   else 
   {

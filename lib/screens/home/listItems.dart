@@ -1,5 +1,5 @@
 
-import 'package:FoodShopApp/models/foodlist.dart';
+import 'package:FoodShopApp/models/category.dart';
 import 'package:FoodShopApp/screens/home/cardlist.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +9,7 @@ class ListItems extends StatefulWidget
 {
   final Size size;
   final Function press;
-  final Future<List<FoodList>> foodList;
+  final Future<List<Category>> category;
   final int number;
   final Widget fab;
   ListItems
@@ -18,7 +18,7 @@ class ListItems extends StatefulWidget
       Key key,
       @required this.size,
       this.press,
-      @required this.foodList,
+      @required this.category,
       this.number,
       this.fab
     }
@@ -26,7 +26,7 @@ class ListItems extends StatefulWidget
   
   // This widget is the root of your application.
   @override
-  _ListItems createState() => _ListItems(size,press,foodList,number,fab);
+  _ListItems createState() => _ListItems(size,press,category,number,fab);
   // #endregion 
 }
 
@@ -38,9 +38,9 @@ class _ListItems extends State<ListItems>
   int number;
   Size size;  
   Function press;
-  Future<List<FoodList>> foodList;
+  Future<List<Category>> category;
 
-  _ListItems(this.size,this.press,this.foodList,this.number,this.fab);
+  _ListItems(this.size,this.press,this.category,this.number,this.fab);
 
   @override
   Widget build(BuildContext context)
@@ -49,9 +49,9 @@ class _ListItems extends State<ListItems>
     (
       height: size.height * 0.8,  
       child:  FutureBuilder
-      (
+      ( 
         initialData: [],
-        future: foodList,
+        future: category,
         builder: (context , foodSnap)
         {
           if(foodSnap.hasData || foodSnap.connectionState == ConnectionState.done)

@@ -2,7 +2,7 @@ import 'package:FoodShopApp/components/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'components/getlistCart.dart';
+import '../../components/getlistCart.dart';
 
 class CardItems extends StatefulWidget
 {
@@ -54,7 +54,7 @@ class _CardItems extends State<CardItems>
           [
             Image.network
             (
-              foodSnap.data[index].url.toString() ,
+              foodSnap.data[index].image.toString() ,
               height: MediaQuery.of(context).size.height * 0.25 - 100,
               width: MediaQuery.of(context).size.width -20,
             ),
@@ -101,7 +101,7 @@ class _CardItems extends State<CardItems>
                   Spacer(),
                   Text
                   (
-                    getItemInCart(foodSnap.data[index].id).toString(),
+                    getItemInCart(int.parse(foodSnap.data[index].id)).toString(),
                     style: TextStyle
                     (
                       color: Colors.white,
@@ -136,7 +136,7 @@ class _CardItems extends State<CardItems>
                       {
                         setState(() =>
                         {
-                          removefromcart(foodSnap.data[index].id),
+                          removefromcart(int.parse(foodSnap.data[index].id)),
                           press()
                         });
                       }

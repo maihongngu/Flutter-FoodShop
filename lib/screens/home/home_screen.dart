@@ -1,14 +1,16 @@
 
 import 'package:FoodShopApp/components/constants.dart';
-import 'package:FoodShopApp/models/foodlist.dart';
-import 'package:FoodShopApp/screens/home/components/getFoodList.dart';
-import 'package:FoodShopApp/screens/home/components/getlistCart.dart';
+import 'package:FoodShopApp/components/getCategories.dart';
+import 'package:FoodShopApp/components/getlistCart.dart';
+import 'package:FoodShopApp/models/category.dart';
 import 'package:FoodShopApp/screens/home/listItems.dart';
 import 'package:FoodShopApp/screens/home/swipeList.dart';
 import 'package:FoodShopApp/screens/home/titleItems.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
-import 'header.dart';
+import '../appbar.dart';
+import 'homeheader.dart';
 
 
 class HomeScreen extends StatefulWidget
@@ -20,34 +22,12 @@ class HomeScreen extends StatefulWidget
 class _HomeSceen extends State<HomeScreen>
 {
   // #region property
-  SearchBar searchBar;
-  Future<List<FoodList>> list = getFoodList();
+  Future<List<Category>> list = getCategories();
   int number ;
-  
   GlobalKey<ScaffoldState> _scaffold = GlobalKey();
   // #endregion
 
   // #region Appbar custom
-  AppBar appbar(BuildContext context) 
-  {
-    return new AppBar
-    (
-      //Style
-      backgroundColor: kMainColor,
-      elevation: 0,
-
-      
-      //tittle
-      centerTitle: true,
-      title: new Text('Food Shop tutorial'),
-
-      //Action
-      actions: 
-      [
-        searchBar.getSearchAction(context),
-      ]
-    );
-  } 
 
   _HomeSceen() 
   {
@@ -61,7 +41,7 @@ class _HomeSceen extends State<HomeScreen>
   }
   // #endregion
   
-  //State
+  // #region StateFAB
   Widget fab = FloatingActionButton.extended
   (
     backgroundColor: kMainColor,
@@ -111,14 +91,13 @@ class _HomeSceen extends State<HomeScreen>
       )
     });
   }
-
-
-  @override
-  void initState()
-  {
-    super.initState();
-    number = getlistCart();
-  }
+  
+  // #region State
+    void initState()
+    {
+      super.initState();
+    }
+  // #endregion
 
   @override
   Widget build (BuildContext context) 
@@ -137,7 +116,7 @@ class _HomeSceen extends State<HomeScreen>
         (
           children : <Widget>
           [
-            HeaderBody(size: size,),
+            HeaderBody(size: size),
             Container
             (
               child: Column
@@ -145,8 +124,8 @@ class _HomeSceen extends State<HomeScreen>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>
                 [
-                  SwipeList(size: size , foodList: list,),
-                  TitleItems(),
+                  SwipeList(size: size , category: list,),
+                  TitleItems(category: list,),
                   ListItems
                   (
                     size: size,
@@ -154,11 +133,9 @@ class _HomeSceen extends State<HomeScreen>
                     {
                       _fabChange()
                     },
-                    foodList: list,
+                    category: list,
                     number: number,
                   ),
-                  
-                   
                 ],
               ),
             )

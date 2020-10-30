@@ -1,6 +1,6 @@
 
 import 'package:FoodShopApp/components/constants.dart';
-import 'package:FoodShopApp/models/foodlist.dart';
+import 'package:FoodShopApp/models/category.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -8,25 +8,25 @@ import 'package:flutter/material.dart';
 class SwipeList extends StatefulWidget
 {
   final Size size;
-  final Future<List<FoodList>> foodList;
+  final Future<List<Category>> category;
   SwipeList
   (
     {
       Key key,
       @required this.size , 
-      this.foodList
+      this.category
     }
   );
 
-  _SwipeList createState() => _SwipeList(size , foodList);
+  _SwipeList createState() => _SwipeList(size , category);
 }
 
 
 class _SwipeList extends State<SwipeList>
 {
   Size size;
-  Future<List<FoodList>> foodList ;
-  _SwipeList(this.size,this.foodList);
+  Future<List<Category>> category ;
+  _SwipeList(this.size,this.category);
 
   @override
   Widget build(BuildContext context )  
@@ -41,7 +41,7 @@ class _SwipeList extends State<SwipeList>
         [
           FutureBuilder 
           (
-            future: foodList,
+            future: category,
             initialData: [],
             builder: (context , foodSnap)
             {
@@ -58,7 +58,7 @@ class _SwipeList extends State<SwipeList>
                   scrollDirection: Axis.horizontal,
                   children: <Widget>
                   [
-                    for(int i =0 ; i< foodSnap.data.length ; i++)
+                    for(int i =0 ; i < foodSnap.data.length ; i++)
                       new GestureDetector
                       ( 
                         onTap: () 
