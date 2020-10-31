@@ -1,6 +1,8 @@
 
 import 'package:FoodShopApp/components/constants.dart';
+import 'package:FoodShopApp/components/getProducts.dart';
 import 'package:FoodShopApp/models/category.dart';
+import 'package:FoodShopApp/models/products.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -9,16 +11,18 @@ class SwipeList extends StatefulWidget
 {
   final Size size;
   final Future<List<Category>> category;
+  final Future<List<Products>> product ;
   SwipeList
   (
     {
       Key key,
       @required this.size , 
-      this.category
+      this.category,
+      this.product
     }
   );
 
-  _SwipeList createState() => _SwipeList(size , category);
+  _SwipeList createState() => _SwipeList(size , category , this.product);
 }
 
 
@@ -26,7 +30,9 @@ class _SwipeList extends State<SwipeList>
 {
   Size size;
   Future<List<Category>> category ;
-  _SwipeList(this.size,this.category);
+  Future<List<Products>> product ;
+
+  _SwipeList(this.size,this.category,this.product);
 
   @override
   Widget build(BuildContext context )  
@@ -63,12 +69,12 @@ class _SwipeList extends State<SwipeList>
                       ( 
                         onTap: () 
                         {
-                          final snackBar = SnackBar
-                          (
-                            content: Text(i.toString()),
-                            
-                          );
-                          Scaffold.of(context).showSnackBar(snackBar);
+                          setState(() 
+                          {
+                            product = getProducts(foodSnap.data[i].id, "");
+                            List<Products> list = List<Products>();
+                            print(list.length);
+                          });
                         },
                         child : Card
                         (
@@ -79,10 +85,6 @@ class _SwipeList extends State<SwipeList>
                           color: kMainColor,
                           child: Container
                           (
-                            // margin: EdgeInsets.only
-                            // (
-                            //   top: 0
-                            // ),
                             width: MediaQuery.of(context).size.width - 50,
                             decoration: BoxDecoration
                             (
@@ -93,36 +95,6 @@ class _SwipeList extends State<SwipeList>
                               ),
                               borderRadius: BorderRadius.all(Radius.circular(36))
                             ),
-                            // child: Column
-                            // (
-                            //   children: <Widget>
-                            //   [
-                            //     // Image.network
-                            //     // (
-                            //     //   
-                            //     //   height: MediaQuery.of(context).size.height * 0.17,
-                            //     //   //width: MediaQuery.of(context).size.width ,
-                            //     // ),
-                            //     Spacer(),
-                            //     Center
-                            //     (
-                            //       child: Align
-                            //       (
-                            //         alignment: Alignment.center,
-                            //         child: Text
-                            //         (
-                            //           foodSnap.data[i].title,
-                            //           style: TextStyle
-                            //           (
-                            //             color: Colors.white,
-                            //             fontSize: 25
-                            //           ),
-                            //         )
-                            //       )
-                            //     ),
-                            //     
-                            //   ],
-                            // )
                           ),
                         )
                       )

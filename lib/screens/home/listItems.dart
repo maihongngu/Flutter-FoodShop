@@ -98,6 +98,7 @@ class _ListItems extends State<ListItems>
                     },
                     child: CardItems
                     (
+                      key: UniqueKey(),
                       foodSnap: foodSnap,
                       index: i,
                       press: press,

@@ -4,6 +4,7 @@ import 'package:FoodShopApp/components/getCategories.dart';
 import 'package:FoodShopApp/components/getProducts.dart';
 import 'package:FoodShopApp/components/getCart.dart';
 import 'package:FoodShopApp/models/category.dart';
+import 'package:FoodShopApp/models/products.dart';
 import 'package:FoodShopApp/screens/home/listItems.dart';
 import 'package:FoodShopApp/screens/home/swipeList.dart';
 import 'package:FoodShopApp/screens/home/titleItems.dart';
@@ -24,7 +25,8 @@ class _HomeSceen extends State<HomeScreen>
 {
   // #region property
   Future<List<Category>> listcategories = getCategories();
-  List<Category> _listcategories = List<Category>();
+  Future<List<Products>> listproducts = getProducts("1","");
+  String categotyId ;
   int number ;
   GlobalKey<ScaffoldState> _scaffold = GlobalKey();
   // #endregion
@@ -94,15 +96,15 @@ class _HomeSceen extends State<HomeScreen>
     });
   }
   
-  //end region
+  // #endregion
 
-
-  // #region State
-    void initState()
-    {
-      listcategories = getCategories();
-      super.initState();
-    }
+  @override
+  void initState()
+  {
+    listcategories = getCategories();
+    
+    super.initState();
+  }
   // #endregion
 
   @override
@@ -130,10 +132,18 @@ class _HomeSceen extends State<HomeScreen>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>
                 [
-                  SwipeList(size: size , category: listcategories,),
+                  SwipeList
+                  (
+                    size: size , 
+                    category: listcategories,
+                    product: listproducts
 
-                  TitleItems(category: listcategories,),
+                  ),
 
+                  TitleItems
+                  (
+                    category: listcategories,
+                  ),
                   ListItems
                   (
                     size: size,
@@ -141,9 +151,10 @@ class _HomeSceen extends State<HomeScreen>
                     {
                       _fabChange()
                     },
-                    products: getProducts(_listcategories.asMap()[0].id,""),
+                    products: listproducts,
                     number: number,
-                  )
+                  ), 
+                  
                 ],
               ),
             )

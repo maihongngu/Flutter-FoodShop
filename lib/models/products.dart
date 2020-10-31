@@ -3,16 +3,16 @@ class Products
   String id;
   String categoryId;
   String name;
-  String avatar;
+  String image;
 
-  Products({this.id, this.categoryId, this.name, this.avatar});
+  Products({this.id, this.categoryId, this.name, this.image});
 
   Products.fromJson(Map<String, dynamic> json) 
   {
     id = json['id'];
     categoryId = json['CategoryId'];
     name = json['name'];
-    avatar = json['avatar'];
+    image = json['image'];
   }
 
   Map<String, dynamic> toJson() 
@@ -21,7 +21,7 @@ class Products
     data['id'] = this.id;
     data['CategoryId'] = this.categoryId;
     data['name'] = this.name;
-    data['avatar'] = this.avatar;
+    data['image'] = this.image;
     return data;
   }
 }
