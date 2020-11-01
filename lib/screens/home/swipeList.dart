@@ -3,8 +3,11 @@ import 'package:FoodShopApp/components/constants.dart';
 import 'package:FoodShopApp/components/getProducts.dart';
 import 'package:FoodShopApp/models/category.dart';
 import 'package:FoodShopApp/models/products.dart';
+import 'package:FoodShopApp/screens/home/home_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'listItems.dart';
 
 
 class SwipeList extends StatefulWidget
@@ -18,11 +21,11 @@ class SwipeList extends StatefulWidget
       Key key,
       @required this.size , 
       this.category,
-      this.product
+      this.product,
     }
   );
 
-  _SwipeList createState() => _SwipeList(size , category , this.product);
+  _SwipeList createState() => _SwipeList(size , category , product  ) ;
 }
 
 
@@ -31,8 +34,8 @@ class _SwipeList extends State<SwipeList>
   Size size;
   Future<List<Category>> category ;
   Future<List<Products>> product ;
-
-  _SwipeList(this.size,this.category,this.product);
+  
+  _SwipeList(this.size,this.category,this.product,);
 
   @override
   Widget build(BuildContext context )  
@@ -69,11 +72,19 @@ class _SwipeList extends State<SwipeList>
                       ( 
                         onTap: () 
                         {
-                          setState(() 
+                          setState(()
                           {
                             product = getProducts(foodSnap.data[i].id, "");
-                            List<Products> list = List<Products>();
-                            print(list.length);
+                            Navigator.pushReplacement(context, MaterialPageRoute
+                            (
+                              builder: (context) =>
+                              HomeScreen
+                              ( 
+                                categoryId: foodSnap.data[i].id,
+                              )
+                            ));
+                            // Route route = MaterialPageRoute(builder: (context) => ListItems(products: product,size: size,));
+                            // Navigator.pushReplacement(context, route);
                           });
                         },
                         child : Card

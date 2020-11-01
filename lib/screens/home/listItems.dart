@@ -15,7 +15,7 @@ class ListItems extends StatefulWidget
   (
     {
       Key key,
-      @required this.size,
+      this.size,
       this.press,
       @required this.products,
       this.number,
@@ -48,7 +48,7 @@ class _ListItems extends State<ListItems>
     (
       height: size.height * 0.8,  
       child:  FutureBuilder
-      ( 
+      (
         initialData: [],
         future: products,
         builder: (context , foodSnap)

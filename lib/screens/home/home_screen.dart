@@ -17,23 +17,31 @@ import 'homeheader.dart';
 
 class HomeScreen extends StatefulWidget
 {
+  final String categoryId;
+
+  HomeScreen
+  (
+    {
+      Key key,
+      this.categoryId
+    }
+  ) : super (key : key);
   @override
-  _HomeSceen createState() => _HomeSceen();
+  _HomeSceen createState() => _HomeSceen(categoryId);
 }
 
 class _HomeSceen extends State<HomeScreen>
 {
+  String categoryId;
   // #region property
-  Future<List<Category>> listcategories = getCategories();
-  Future<List<Products>> listproducts = getProducts("1","");
-  String categotyId ;
+  Future<List<Category>> listcategories ;
+  Future<List<Products>> listproducts ;
   int number ;
   GlobalKey<ScaffoldState> _scaffold = GlobalKey();
   // #endregion
-
   // #region Appbar custom
 
-  _HomeSceen() 
+  _HomeSceen(this.categoryId) 
   {
     searchBar = new SearchBar
     (
@@ -95,14 +103,22 @@ class _HomeSceen extends State<HomeScreen>
       )
     });
   }
-  
   // #endregion
 
   @override
   void initState()
   {
     listcategories = getCategories();
-    
+
+    if(categoryId == null || categoryId =="" )
+    {
+      listproducts=  getProducts("1","");
+    }
+    else
+    {
+      listproducts = getProducts(categoryId, "");
+    }
+
     super.initState();
   }
   // #endregion
@@ -136,8 +152,6 @@ class _HomeSceen extends State<HomeScreen>
                   (
                     size: size , 
                     category: listcategories,
-                    product: listproducts
-
                   ),
 
                   TitleItems
