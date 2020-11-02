@@ -1,6 +1,6 @@
 import 'package:FoodShopApp/components/constants.dart';
-import 'package:FoodShopApp/screens/detail/detailheader.dart';
 import 'package:FoodShopApp/components/getCart.dart';
+import 'package:FoodShopApp/screens/detail/detailheader.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
@@ -29,7 +29,7 @@ class _MainDetail extends State<MainDetail>
       alignment: Alignment.centerLeft,
       child: Text
       (
-        getlistCart().toString()
+        countlistCart().toString()
       ),
     ),
     icon : Icon
@@ -38,34 +38,6 @@ class _MainDetail extends State<MainDetail>
       size: 30,
     ),
   ); 
-  
-  // _fabChange() async
-  // {
-  //   setState(() =>
-  //   {
-  //     fab = FloatingActionButton.extended
-  //     (
-  //       backgroundColor: kMainColor,
-  //       key: UniqueKey(),
-  //       onPressed: () => 
-  //       {
-  //       },
-  //       label: Align
-  //       (
-  //         alignment: Alignment.centerLeft,
-  //         child: Text
-  //         (
-  //           getlistCart().toString()
-  //         ),
-  //       ),
-  //       icon : Icon
-  //       (
-  //         Icons.add_shopping_cart ,
-  //         size: 30,
-  //       ),
-  //     )
-  //   });
-  // }
   
   // #endregion
   _MainDetail()

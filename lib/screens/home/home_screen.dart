@@ -5,6 +5,7 @@ import 'package:FoodShopApp/components/getProducts.dart';
 import 'package:FoodShopApp/components/getCart.dart';
 import 'package:FoodShopApp/models/category.dart';
 import 'package:FoodShopApp/models/products.dart';
+import 'package:FoodShopApp/screens/cart/cart_screen.dart';
 import 'package:FoodShopApp/screens/home/components/getupdateProducts.dart';
 import 'package:FoodShopApp/screens/home/listItems.dart';
 import 'package:FoodShopApp/screens/home/swipeList.dart';
@@ -60,14 +61,14 @@ class _HomeSceen extends State<HomeScreen>
     backgroundColor: kMainColor,
     onPressed: () => 
     {
-
+     
     },
     label: Align
     (
       alignment: Alignment.centerLeft,
       child: Text
       (
-        getlistCart().toString()
+        countlistCart().toString()
       ),
     ),
     icon : Icon
@@ -87,13 +88,21 @@ class _HomeSceen extends State<HomeScreen>
         key: UniqueKey(),
         onPressed: () => 
         {
+          Navigator.push
+          ( 
+            context,
+            MaterialPageRoute
+            (
+              builder: (context) => new CartScreen(),
+            )
+          )
         },
         label: Align
         (
           alignment: Alignment.centerLeft,
           child: Text
           (
-            getlistCart().toString()
+            countlistCart().toString()
           ),
         ),
         icon : Icon
@@ -121,7 +130,6 @@ class _HomeSceen extends State<HomeScreen>
     {
       listproducts = getProducts(categoryId, "");
     }
-
     super.initState();
   }
   // #endregion

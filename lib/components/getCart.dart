@@ -9,7 +9,7 @@ addtoCart(dynamic _tempList)
 {
   _cartList.add(_tempList);
 }
-int getlistCart()
+int countlistCart()
 {
   return _cartList.length;
   //_cartList.length;
@@ -29,6 +29,7 @@ int getItemInCart(int id)
   //_cartList.length;
 }
 
+List<Products> cartList = _cartList;
 removefromcart( int id )
 {
   final items = _cartList.asMap();  //map cart list
