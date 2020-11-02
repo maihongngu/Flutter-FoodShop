@@ -100,12 +100,8 @@ class _TittleItems extends State<TitleItems>
               );
           } ,
         )
+     
       ]
-      // padding: EdgeInsets.only
-      // (
-      //   top: 20,
-      //   bottom: 15,
-      // ),
       
     );
   }

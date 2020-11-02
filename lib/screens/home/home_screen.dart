@@ -5,6 +5,7 @@ import 'package:FoodShopApp/components/getProducts.dart';
 import 'package:FoodShopApp/components/getCart.dart';
 import 'package:FoodShopApp/models/category.dart';
 import 'package:FoodShopApp/models/products.dart';
+import 'package:FoodShopApp/screens/home/components/getupdateProducts.dart';
 import 'package:FoodShopApp/screens/home/listItems.dart';
 import 'package:FoodShopApp/screens/home/swipeList.dart';
 import 'package:FoodShopApp/screens/home/titleItems.dart';
@@ -103,7 +104,9 @@ class _HomeSceen extends State<HomeScreen>
       )
     });
   }
-  // #endregion
+  // #endregion 
+
+  
 
   @override
   void initState()
@@ -152,23 +155,43 @@ class _HomeSceen extends State<HomeScreen>
                   (
                     size: size , 
                     category: listcategories,
+                    presstoLoad: (item)
+                    {
+                      setState(() 
+                      {
+                        listproducts = getProducts(item,"");
+                      });
+                    },
+
                   ),
 
                   TitleItems
                   (
                     category: listcategories,
                   ),
-                  ListItems
+
+                  FutureBuilder
                   (
-                    size: size,
-                    press: () => 
+                    future: listproducts,
+                    builder: (context, AsyncSnapshot snapshot)
                     {
-                      _fabChange()
+                      return UpdateListItems 
+                      (
+                        key: UniqueKey(),
+                        listProducts: snapshot.data,
+                        child: ListItems
+                        (
+                          products: listproducts,
+                          number: number,
+                          press: () =>
+                          {
+                            _fabChange()
+                          },
+                          size: size,
+                        ),
+                      );
                     },
-                    products: listproducts,
-                    number: number,
-                  ), 
-                  
+                  )
                 ],
               ),
             )

@@ -1,5 +1,6 @@
 import 'package:FoodShopApp/models/products.dart';
 import 'package:FoodShopApp/screens/home/cardlist.dart';
+import 'package:FoodShopApp/screens/home/components/getupdateProducts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +11,6 @@ class ListItems extends StatefulWidget
   final Function press;
   final Future<List<Products>> products;
   final int number;
-  final Widget fab;
   ListItems
   (
     {
@@ -19,27 +19,25 @@ class ListItems extends StatefulWidget
       this.press,
       @required this.products,
       this.number,
-      this.fab
     }
   ) : super ( key : key );
   
   // This widget is the root of your application.
   @override
-  _ListItems createState() => _ListItems(size,press,products,number,fab);
+  _ListItems createState() => _ListItems(size,press,products,number);
   // #endregion 
 }
 
 
 class _ListItems extends State<ListItems>
 {
-  Widget fab;
   int length; 
   int number;
   Size size;  
   Function press;
   Future<List<Products>> products;
 
-  _ListItems(this.size,this.press,this.products,this.number,this.fab);
+  _ListItems(this.size,this.press,this.products,this.number);
 
   @override
   Widget build(BuildContext context)
@@ -78,23 +76,23 @@ class _ListItems extends State<ListItems>
                   (
                     onTap: () => 
                     {
-                      showDialog
-                      (
-                        context: context,
-                        builder:  ( context  )
-                        {
-                          return AlertDialog
-                          (
-                            content: CardItems
-                            (
-                              key: UniqueKey(),
-                              foodSnap: foodSnap,
-                              index: i,
-                              press: press,
-                            )
-                          );
-                        }
-                      )
+                      // showDialog
+                      // (
+                      //   context: context,
+                      //   builder:  ( context  )
+                      //   {
+                      //     return AlertDialog
+                      //     (
+                      //       content: CardItems
+                      //       (
+                      //         key: UniqueKey(),
+                      //         foodSnap: foodSnap,
+                      //         index: i,
+                      //         press: press,
+                      //       )
+                      //     );
+                      //   }
+                      // )
                     },
                     child: CardItems
                     (

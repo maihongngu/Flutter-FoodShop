@@ -3,11 +3,8 @@ import 'package:FoodShopApp/components/constants.dart';
 import 'package:FoodShopApp/components/getProducts.dart';
 import 'package:FoodShopApp/models/category.dart';
 import 'package:FoodShopApp/models/products.dart';
-import 'package:FoodShopApp/screens/home/home_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'listItems.dart';
 
 
 class SwipeList extends StatefulWidget
@@ -15,17 +12,20 @@ class SwipeList extends StatefulWidget
   final Size size;
   final Future<List<Category>> category;
   final Future<List<Products>> product ;
+  final Function(String ) presstoLoad;
   SwipeList
   (
     {
+
       Key key,
       @required this.size , 
       this.category,
       this.product,
+      this.presstoLoad
     }
   );
 
-  _SwipeList createState() => _SwipeList(size , category , product  ) ;
+  _SwipeList createState() => _SwipeList(size , category , product ,presstoLoad ) ;
 }
 
 
@@ -34,12 +34,13 @@ class _SwipeList extends State<SwipeList>
   Size size;
   Future<List<Category>> category ;
   Future<List<Products>> product ;
+  Function(String ) presstoLoad;
   
-  _SwipeList(this.size,this.category,this.product,);
+  _SwipeList(this.size,this.category,this.product,this.presstoLoad);
 
   @override
   Widget build(BuildContext context )  
-  { 
+  {
     // #region List Swipe 
     return Container
     (
@@ -74,15 +75,16 @@ class _SwipeList extends State<SwipeList>
                         {
                           setState(()
                           {
-                            product = getProducts(foodSnap.data[i].id, "");
-                            Navigator.pushReplacement(context, MaterialPageRoute
-                            (
-                              builder: (context) =>
-                              HomeScreen
-                              ( 
-                                categoryId: foodSnap.data[i].id,
-                              )
-                            ));
+                            this.widget.presstoLoad(foodSnap.data[i].id);
+                            //  product = getProducts(foodSnap.data[i].id, "");
+                            // Navigator.pushReplacement(context, MaterialPageRoute
+                            // (
+                            //   builder: (context) =>
+                            //   HomeScreen
+                            //   ( 
+                            //     categoryId: foodSnap.data[i].id,
+                            //   )
+                            // ));
                             // Route route = MaterialPageRoute(builder: (context) => ListItems(products: product,size: size,));
                             // Navigator.pushReplacement(context, route);
                           });
