@@ -4,16 +4,24 @@ import 'dart:core';
 import 'package:FoodShopApp/models/products.dart';
 
 List<Products> _cartList = List<Products>();
+List<Products> cartList =List<Products>() ;
 
 addtoCart(dynamic _tempList)
 {
   _cartList.add(_tempList);
+  
+  if(cartList.where((element) => element.id == _tempList.id).length < 1)
+  {
+    cartList.add(_tempList);
+  }
 }
 int countlistCart()
 {
   return _cartList.length;
   //_cartList.length;
 }
+
+
 
 int getItemInCart(int id)
 {
@@ -29,7 +37,7 @@ int getItemInCart(int id)
   //_cartList.length;
 }
 
-List<Products> cartList = _cartList;
+
 removefromcart( int id )
 {
   final items = _cartList.asMap();  //map cart list
@@ -38,6 +46,10 @@ removefromcart( int id )
     if(int.parse(_cartList[i].id) == id)
     {
       _cartList.remove(items[i]);
+      if(_cartList.where((element) => element.id == id ).length ==0)
+      {
+        cartList.removeWhere((element) => element.id == id) ;
+      }
       break;
     }
   }

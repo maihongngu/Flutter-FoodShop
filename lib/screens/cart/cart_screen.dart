@@ -40,33 +40,6 @@ class _CartScreen extends State<CartScreen>
     ),
   ); 
   
-  _fabChange() async
-  {
-    setState(() =>
-    {
-      fab = FloatingActionButton.extended
-      (
-        backgroundColor: kMainColor,
-        key: UniqueKey(),
-        onPressed: () => 
-        {
-        },
-        label: Align
-        (
-          alignment: Alignment.centerLeft,
-          child: Text
-          (
-            countlistCart().toString()
-          ),
-        ),
-        icon : Icon
-        (
-          Icons.add_shopping_cart ,
-          size: 30,
-        ),
-      )
-    });
-  }
   // #endregion 
 
   @override
@@ -93,6 +66,7 @@ class _CartScreen extends State<CartScreen>
             HeaderDetail(size: size,),
             Column
             (
+              
               children: <Widget>
               [
                 Align
@@ -111,7 +85,6 @@ class _CartScreen extends State<CartScreen>
                 (
                   size: size,
                 ),
-                Text("bottom")
               ],
             )
           ],

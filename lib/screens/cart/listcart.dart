@@ -1,5 +1,6 @@
 import 'package:FoodShopApp/components/constants.dart';
 import 'package:FoodShopApp/components/getCart.dart';
+import 'package:FoodShopApp/models/products.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -21,12 +22,38 @@ class _ListCart extends State<ListCart>
 {
   Size size;
   _ListCart(this.size);
+  
+  List<Products> temp = cartList;   
+  itemsCartLength()
+  {
+    for(int i = 0 ; i < temp.length ; i ++)
+    {
+      int count =0;
+      cartList.forEach
+      (
+        (element) 
+        {
+          if(temp[i].id ==element.id  )
+          {
+            count ++;
+            if(count >1 && temp.length >1) 
+            {
+              temp.remove(temp[i]);
+            }
+          }
+        }
+      );
+    }
+    return temp;
+  }
+
   @override
   Widget build(BuildContext context)
   {
     return Container
     (
       height: size.height *0.6 ,
+      
       child : ListView
       (
         shrinkWrap: true,
@@ -34,78 +61,60 @@ class _ListCart extends State<ListCart>
         //physics: const NeverScrollableScrollPhysics(),
         children: <Widget>
         [
-          for ( int i = 0 ; i < countlistCart() ; i ++)
-            if((i != 0 && cartList[i].id !=cartList[i-1].id) || i ==0 )
-              Card
+          for ( int i = 0 ; i < cartList.length ; i ++)
+            //if( cartList.where((element) => element.id == cartList[i].id).length == 1 ||  )  
+            Card
+            (
+              shape: BeveledRectangleBorder
               (
-                shape: BeveledRectangleBorder
-                (
-                  borderRadius: BorderRadius.circular(15.0),
-                ),
-                color: kMainColor,
-                child: Row
-                (
-                  children: <Widget>
-                  [
-                    Image.network
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              color: kMainColor,
+              child: Row
+              (
+                children: <Widget>
+                [
+                  Image.network
+                  (
+                    cartList[i].image,
+                    height: 120 ,
+                    width: 100,
+                  ),
+                  Spacer(),
+                  Align
+                  (
+                    alignment: Alignment.centerRight,
+                    child: Container
                     (
-                      cartList[i].image,
-                      height: 120 ,
-                      width: 100,
-                    ),
-                    Spacer(),
-                    Align
-                    (
-                      alignment: Alignment.centerRight,
-                      child: Container
+                      padding: EdgeInsets.only
                       (
-                        padding: EdgeInsets.only
-                        (
-                          left: 10,
-                          right: 10
-                        ),
-                        child: Row
-                        (
-                          children: <Widget>
-                          [
-                            SizedBox
+                        left: 10,
+                        right: 10
+                      ),
+                      child: Row
+                      (
+                        children: <Widget>
+                        [
+                          SizedBox
+                          (
+                            width: size.width *0.1,
+                            child: RaisedButton
                             (
-                              width: size.width *0.1,
-                              child: RaisedButton
+                              color: kButtonColor,
+                              shape: RoundedRectangleBorder
                               (
-                                color: kButtonColor,
-                                shape: RoundedRectangleBorder
-                                (
-                                  borderRadius: BorderRadius.circular(100)
-                                ),
-                                onPressed: () 
+                                borderRadius: BorderRadius.circular(100)
+                              ),
+                              onPressed: () 
+                              {
+                                setState(() =>
                                 {
-                                  setState(() =>
-                                  {
-                                    addtoCart(cartList[i])  
-                                  });
-                                },
-                                child: Text
-                                (
-                                  "+",
-                                  style: TextStyle
-                                  (
-                                    color: Colors.white,
-                                    fontSize: 25
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Container
-                            (
-                              padding: EdgeInsets.only
-                              (
-                                left: 10,
-                                right: 10
-                              ),
+                                  addtoCart(cartList[i])
+                                });
+                              },
                               child: Text
                               (
-                                getItemInCart(int.parse(cartList[i].id)).toString(),
+                                "+",
                                 style: TextStyle
                                 (
                                   color: Colors.white,
@@ -113,41 +122,59 @@ class _ListCart extends State<ListCart>
                                 ),
                               ),
                             ),
-                            SizedBox
+                          ),
+                          Container
+                          (
+                            padding: EdgeInsets.only
                             (
-                              width: size.width *0.1,
-                              child: RaisedButton
+                              left: 10,
+                              right: 10
+                            ),
+                            child: Text
+                            (
+                              getItemInCart(int.parse(cartList[i].id)).toString(),
+                              style: TextStyle
                               (
-                                color: kButtonColor,
-                                shape: RoundedRectangleBorder
+                                color: Colors.white,
+                                fontSize: 25
+                              ),
+                            ),
+                          ),
+                          SizedBox
+                          (
+                            width: size.width *0.1,
+                            child: RaisedButton
+                            (
+                              color: kButtonColor,
+                              shape: RoundedRectangleBorder
+                              (
+                                borderRadius: BorderRadius.circular(100)
+                              ),
+                              onPressed: () 
+                              { 
+                                setState(() =>
+                                {
+                                  removefromcart(int.parse(cartList[i].id)),
+                                });
+                              },
+                              child: Text
+                              (
+                                "-",
+                                style: TextStyle
                                 (
-                                  borderRadius: BorderRadius.circular(100)
-                                ),
-                                onPressed: () 
-                                { 
-                                  setState(() =>
-                                  {
-                                    removefromcart(int.parse(cartList[i].id))  
-                                  });
-                                },
-                                child: Text
-                                (
-                                  "-",
-                                  style: TextStyle
-                                  (
-                                    color: Colors.white,
-                                    fontSize: 25
-                                  ),
+                                  color: Colors.white,
+                                  fontSize: 25
                                 ),
                               ),
                             ),
-                          ]
-                        ),
-                      )
+                          ),
+                        ]
+                      ),
                     )
-                  ],
-                ),
+                  )
+                ],
               ),
+            ),
         ],
       )
     );
