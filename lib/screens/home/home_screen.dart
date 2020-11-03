@@ -180,23 +180,31 @@ class _HomeSceen extends State<HomeScreen>
 
                   FutureBuilder
                   (
+                    //key: UniqueKey(),
+                    initialData: [],
                     future: listproducts,
                     builder: (context, AsyncSnapshot snapshot)
                     {
-                      return UpdateListItems 
-                      (
-                        key: UniqueKey(),
-                        listProducts: snapshot.data,
-                        child: ListItems
+                      if(snapshot.hasData && snapshot.connectionState == ConnectionState.done)
+                      {
+                        return UpdateListItems 
                         (
-                          products: listproducts,
-                          number: number,
-                          press: () =>
-                          {
-                            _fabChange()
-                          },
-                          size: size,
-                        ),
+                          listProducts: snapshot.data,
+                          child: ListItems
+                          (
+                            products: listproducts,
+                            number: number,
+                            press: () =>
+                            {
+                              _fabChange()
+                            },
+                            size: size,
+                          ),
+                        );
+                      }
+                      return Center
+                      (
+                        child : CircularProgressIndicator()
                       );
                     },
                   )

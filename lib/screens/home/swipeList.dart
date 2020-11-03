@@ -54,7 +54,7 @@ class _SwipeList extends State<SwipeList>
             initialData: [],
             builder: (context , foodSnap)
             {
-              if(foodSnap.connectionState == ConnectionState.done || foodSnap.hasData)
+              if(foodSnap.connectionState == ConnectionState.done && foodSnap.hasData)
               {
                 return ListView
                 (
@@ -102,7 +102,10 @@ class _SwipeList extends State<SwipeList>
                             (
                               image: DecorationImage
                               (
-                                image: NetworkImage(foodSnap.data[i].image.toString() ,),
+                                image: NetworkImage(foodSnap.data[i].image.toString() ,scale: 1.0),onError: (exception, stackTrace) 
+                                {
+                                  return Center(child:  CircularProgressIndicator(),);  
+                                },
                                 fit: BoxFit.fill
                               ),
                               borderRadius: BorderRadius.all(Radius.circular(36))

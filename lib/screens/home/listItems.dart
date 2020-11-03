@@ -50,7 +50,7 @@ class _ListItems extends State<ListItems>
         future: products,
         builder: (context , foodSnap)
         {
-          if(foodSnap.hasData || foodSnap.connectionState == ConnectionState.done)
+          if(foodSnap.hasData && foodSnap.connectionState == ConnectionState.done)
           {
             if( foodSnap.data.length > 6)
             {
@@ -71,36 +71,25 @@ class _ListItems extends State<ListItems>
               children: <Widget>
               [
                 for( int i =0 ; i < length ; i ++)
-                  GestureDetector
-                  (
-                    onTap: () => 
-                    {
-                      // showDialog
-                      // (
-                      //   context: context,
-                      //   builder:  ( context  )
-                      //   {
-                      //     return AlertDialog
-                      //     (
-                      //       content: CardItems
-                      //       (
-                      //         key: UniqueKey(),
-                      //         foodSnap: foodSnap,
-                      //         index: i,
-                      //         press: press,
-                      //       )
-                      //     );
-                      //   }
-                      // )
-                    },
-                    child: CardItems
+                  if(foodSnap.hasData && foodSnap.connectionState == ConnectionState.done)
+                    GestureDetector
                     (
-                      key: UniqueKey(),
-                      foodSnap: foodSnap,
-                      index: i,
-                      press: press,
-                    ),
-                 )
+                      onTap: () => 
+                      {
+                      },
+                      child: CardItems
+                      (
+                        key: UniqueKey(),
+                        foodSnap: foodSnap,
+                        index: i,
+                        press: press,
+                      ),
+                    )
+                  else
+                    Center
+                    (
+                      child: CircularProgressIndicator(),
+                    )
               ],
             );
           }
