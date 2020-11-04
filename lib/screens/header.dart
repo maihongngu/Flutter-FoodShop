@@ -1,14 +1,13 @@
 import 'package:FoodShopApp/components/constants.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-class HeaderBody extends StatefulWidget 
+class Header extends StatefulWidget 
 {
   final Size size;
 
-  HeaderBody
+  Header
   (
     {
       Key key,
@@ -18,15 +17,14 @@ class HeaderBody extends StatefulWidget
   
   // This widget is the root of your application.
   @override
-  _HeaderBody createState() => _HeaderBody(size);
+  _Header createState() => _Header(size);
   // #endregion 
 }
 
-class _HeaderBody extends State<HeaderBody>
+class _Header extends State<Header>
 {
   Size size ;
-  _HeaderBody(this.size);
-  // #endregion
+  _Header(this.size);
 
   @override
   Widget build(BuildContext context )

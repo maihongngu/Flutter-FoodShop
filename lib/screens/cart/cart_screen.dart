@@ -1,11 +1,11 @@
 
 
 import 'package:FoodShopApp/components/constants.dart';
-import 'package:FoodShopApp/components/getCart.dart';
-import 'package:FoodShopApp/screens/detail/detailheader.dart';
+import 'package:FoodShopApp/screens/cart/payment.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../header.dart';
 import 'listcart.dart';
 
 class CartScreen extends StatefulWidget
@@ -17,30 +17,6 @@ class CartScreen extends StatefulWidget
 
 class _CartScreen extends State<CartScreen>
 {
-  // #region StateFAB
-  Widget fab = FloatingActionButton.extended
-  (
-    backgroundColor: kMainColor,
-    onPressed: () => 
-    {
-
-    },
-    label: Align
-    (
-      alignment: Alignment.centerLeft,
-      child: Text
-      (
-        countlistCart().toString()
-      ),
-    ),
-    icon : Icon
-    (
-      Icons.add_shopping_cart ,
-      size: 30,
-    ),
-  ); 
-  
-  // #endregion 
 
   @override
   Widget build(BuildContext context)
@@ -48,7 +24,6 @@ class _CartScreen extends State<CartScreen>
     Size size = MediaQuery.of(context).size;
     return Scaffold
     (
-      floatingActionButton: fab,
       appBar: AppBar
       (
         backgroundColor: kMainColor,
@@ -63,10 +38,9 @@ class _CartScreen extends State<CartScreen>
         (
           children: <Widget>
           [
-            HeaderDetail(size: size,),
+            Header(size: size,),
             Column
             (
-              
               children: <Widget>
               [
                 Align
@@ -85,6 +59,11 @@ class _CartScreen extends State<CartScreen>
                 (
                   size: size,
                 ),
+                Payment
+                (
+                  size: size,
+                )
+
               ],
             )
           ],

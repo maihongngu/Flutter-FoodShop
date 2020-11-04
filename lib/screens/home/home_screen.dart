@@ -14,7 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 import '../appbar.dart';
-import 'homeheader.dart';
+import '../header.dart';
 
 
 class HomeScreen extends StatefulWidget
@@ -124,7 +124,7 @@ class _HomeSceen extends State<HomeScreen>
 
     if(categoryId == null || categoryId =="" )
     {
-      listproducts=  getProducts("1","");
+      listproducts =  getProducts("1","");
     }
     else
     {
@@ -151,7 +151,7 @@ class _HomeSceen extends State<HomeScreen>
         (
           children : <Widget>
           [
-            HeaderBody(size: size),
+            Header(size: size),
             Container
             (
               child: Column
@@ -183,7 +183,7 @@ class _HomeSceen extends State<HomeScreen>
                     //key: UniqueKey(),
                     initialData: [],
                     future: listproducts,
-                    builder: (context, AsyncSnapshot snapshot)
+                    builder: (context, snapshot)
                     {
                       if(snapshot.hasData && snapshot.connectionState == ConnectionState.done)
                       {

@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:FoodShopApp/models/products.dart';
 import 'package:http/http.dart' as http;
 
@@ -35,5 +34,4 @@ Future<List<Products>> getProducts(String categoryId , String productId) async
   // var result = await http.get(apiUrl);
   // return json.decode(result.body);
 }
-
 

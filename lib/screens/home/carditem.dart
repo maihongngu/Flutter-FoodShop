@@ -1,4 +1,5 @@
 import 'package:FoodShopApp/components/constants.dart';
+import 'package:FoodShopApp/components/getProducts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -57,6 +58,20 @@ class _CardItems extends State<CardItems>
               foodSnap.data[index].image.toString() ,
               height: MediaQuery.of(context).size.height * 0.25 - 100,
               width: MediaQuery.of(context).size.width -20,
+            ),
+            Spacer(),
+            Align
+            (
+              alignment: Alignment.center,
+              child: Text
+              (
+                foodSnap.data[index].price,
+                style: TextStyle
+                (
+                  color: Colors.white,
+                  fontSize: 25,
+                ),
+              ),
             ),
             Spacer(),
             Center

@@ -1,11 +1,11 @@
 import 'package:FoodShopApp/components/constants.dart';
 import 'package:FoodShopApp/components/getCart.dart';
-import 'package:FoodShopApp/screens/detail/detailheader.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 
 import '../appbar.dart';
+import '../header.dart';
 
 class MainDetail extends StatefulWidget
 {
@@ -66,7 +66,7 @@ class _MainDetail extends State<MainDetail>
         (
           children: <Widget>
           [
-            HeaderDetail(size: size,)           
+            Header(size: size,)           
           ],
         ),
       )
