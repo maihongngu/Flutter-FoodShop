@@ -2,6 +2,7 @@
 
 import 'package:FoodShopApp/components/constants.dart';
 import 'package:FoodShopApp/screens/cart/payment.dart';
+import 'package:FoodShopApp/screens/home/home_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -30,6 +31,14 @@ class _CartScreen extends State<CartScreen>
         elevation: 0,
         centerTitle: true,
         title: new Text('Food Shop tutorial'),
+        leading: IconButton
+        (
+          icon: Icon(Icons.arrow_back),
+          onPressed: () =>
+          {
+            Navigator.of(context).pop(HomeScreen())
+          },
+        ),
       ),
 
       body: Container
@@ -63,7 +72,6 @@ class _CartScreen extends State<CartScreen>
                 (
                   size: size,
                 )
-
               ],
             )
           ],

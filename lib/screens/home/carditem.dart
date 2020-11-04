@@ -1,5 +1,4 @@
 import 'package:FoodShopApp/components/constants.dart';
-import 'package:FoodShopApp/components/getProducts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

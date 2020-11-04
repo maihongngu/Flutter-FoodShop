@@ -46,8 +46,10 @@ removefromcart( int id )
     if(int.parse(_cartList[i].id) == id)
     {
       _cartList.remove(items[i]);
+      // ignore: unrelated_type_equality_checks
       if(_cartList.where((element) => element.id == id ).length ==0)
       {
+        // ignore: unrelated_type_equality_checks
         cartList.removeWhere((element) => element.id == id) ;
       }
       break;

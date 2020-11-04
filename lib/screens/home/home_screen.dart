@@ -19,31 +19,22 @@ import '../header.dart';
 
 class HomeScreen extends StatefulWidget
 {
-  final String categoryId;
-
-  HomeScreen
-  (
-    {
-      Key key,
-      this.categoryId
-    }
-  ) : super (key : key);
   @override
-  _HomeSceen createState() => _HomeSceen(categoryId);
+  _HomeSceen createState() => _HomeSceen();
 }
 
 class _HomeSceen extends State<HomeScreen>
 {
-  String categoryId;
+  
   // #region property
+  String categoryId;
   Future<List<Category>> listcategories ;
   Future<List<Products>> listproducts ;
   int number ;
   GlobalKey<ScaffoldState> _scaffold = GlobalKey();
   // #endregion
   // #region Appbar custom
-
-  _HomeSceen(this.categoryId) 
+  _HomeSceen() 
   {
     searchBar = new SearchBar
     (
@@ -54,7 +45,6 @@ class _HomeSceen extends State<HomeScreen>
     );
   }
   // #endregion
-  
   // #region StateFAB
   Widget fab = FloatingActionButton.extended
   (
@@ -114,12 +104,11 @@ class _HomeSceen extends State<HomeScreen>
     });
   }
   // #endregion 
-
-  
-
+  // #region State
   @override
   void initState()
   {
+
     listcategories = getCategories();
 
     if(categoryId == null || categoryId =="" )

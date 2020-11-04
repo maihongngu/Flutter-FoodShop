@@ -24,28 +24,6 @@ class _ListCart extends State<ListCart>
   _ListCart(this.size);
   
   List<Products> temp = cartList;   
-  itemsCartLength()
-  {
-    for(int i = 0 ; i < temp.length ; i ++)
-    {
-      int count =0;
-      cartList.forEach
-      (
-        (element) 
-        {
-          if(temp[i].id ==element.id  )
-          {
-            count ++;
-            if(count >1 && temp.length >1) 
-            {
-              temp.remove(temp[i]);
-            }
-          }
-        }
-      );
-    }
-    return temp;
-  }
 
   @override
   Widget build(BuildContext context)
