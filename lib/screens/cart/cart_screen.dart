@@ -2,7 +2,6 @@
 
 import 'package:FoodShopApp/components/constants.dart';
 import 'package:FoodShopApp/screens/cart/payment.dart';
-import 'package:FoodShopApp/screens/home/home_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -34,9 +33,12 @@ class _CartScreen extends State<CartScreen>
         leading: IconButton
         (
           icon: Icon(Icons.arrow_back),
-          onPressed: () =>
+          onPressed: () 
           {
-            Navigator.of(context).pop(HomeScreen())
+            setState(() =>
+            {
+              Navigator.pop(context)
+            });
           },
         ),
       ),

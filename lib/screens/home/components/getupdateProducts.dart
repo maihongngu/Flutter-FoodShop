@@ -24,7 +24,8 @@ class UpdateListItems extends InheritedWidget
   @override
   bool updateShouldNotify(UpdateListItems oldWidget)
   {
-    return listProducts != oldWidget.listProducts;
+    return listProducts != oldWidget.listProducts ;
     //return true;
   }
+
 }

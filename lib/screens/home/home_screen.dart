@@ -78,12 +78,34 @@ class _HomeSceen extends State<HomeScreen>
         key: UniqueKey(),
         onPressed: () => 
         {
+          // Navigator.push
+          // ( 
+          //   context,
+          //   MaterialPageRoute
+          //   (
+          //     builder: (context) => new CartScreen(),
+          //   )
+          // ).then
+          // (
+          //   (value) => setState()
+          //   {
+          //     
+          //   }
+          // )
           Navigator.push
           ( 
-            context,
-            MaterialPageRoute
+            context, MaterialPageRoute
+            ( 
+              builder: (context) => CartScreen()
+            ), 
+          ).then
+          (
+            (value) => setState
             (
-              builder: (context) => new CartScreen(),
+              () 
+              {
+                
+              }
             )
           )
         },
