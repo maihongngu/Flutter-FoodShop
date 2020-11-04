@@ -29,7 +29,62 @@ class _Payment extends State<Payment>
     (
       onTap: () 
       {
-        print("huray");
+        showDialog
+        (
+          context: context,
+          builder: (BuildContext context)
+          {
+            return AlertDialog
+            (
+              actions: <Widget>
+              [
+                RaisedButton
+                (
+                  onPressed: () 
+                  {
+                    Navigator.pop(context);
+                  },
+                  child: Icon(Icons.close),
+                )
+              ],
+              content: Stack
+              (
+                children: <Widget>
+                [
+                  Column
+                  (
+                    children: <Widget>
+                    [
+                      Container
+                      (
+                        decoration: BoxDecoration
+                        (
+                          color: kMainColor,
+                          borderRadius: BorderRadius.circular(36)
+                        ),
+                        child: Align
+                        (
+                        
+                          alignment: Alignment.center,  
+                          child: Text
+                          (
+                            "Payment",
+                            style: TextStyle
+                            (
+                              color: HexColor("##F9DC5C"),
+                              fontSize: 25
+                            ),
+
+                          ),
+                        ),
+                      )
+                    ],
+                  )
+                ],
+              ),
+            );
+          }
+        );
       },
       child : Container
       (
@@ -50,6 +105,7 @@ class _Payment extends State<Payment>
           alignment: Alignment.center,
           child: Row
           (
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>
             [
               Icon
