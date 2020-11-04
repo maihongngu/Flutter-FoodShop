@@ -25,7 +25,7 @@ class HomeScreen extends StatefulWidget
 
 class _HomeSceen extends State<HomeScreen>
 {
-  
+  // Cai loz gi the ???? :D ???? 
   // #region property
   String categoryId;
   Future<List<Category>> listcategories ;
